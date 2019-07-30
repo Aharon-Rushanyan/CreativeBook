@@ -1,0 +1,44 @@
+
+    .bookWrapper{
+        width: 400px;
+        box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+        margin: 15px;
+        padding: 10px;
+    }
+
+    .bookInfo{
+        display: flex;
+    }
+
+    .bookImg {
+        width : 200px;
+
+    }
+
+   .bookAuthor{
+       font-weight: bold;
+   }
+
+   .imgWrapper{
+       margin-right: 10px;
+   }
+
+ .bookRate {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: left;
+  }
+
+  .bookRate > span {
+    display: inline-block;
+    position: relative;
+    flex-width: 1.1em;
+    cursor: pointer;
+  }
+
+  .bookRate > span:hover:before,
+  .bookRate > span:hover ~ span:before {
+     content: "\2605";
+     position: absolute;
+     color: gold;
+  }
