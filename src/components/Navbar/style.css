@@ -1,0 +1,15 @@
+.MuiAppBar-colorPrimary{
+    background: url(https://scontent.fevn2-1.fna.fbcdn.net/v/t1.15752-9/67675621_410611492892295_7656024374738157568_n.jpg?_nc_cat=101&_nc_oc=AQnVFu1haT0RRYgMjgwU6oKuvijD31nJvTgZnPujZvtriRBEoK1TIpOiZ4CQRSaaO7I&_nc_ht=scontent.fevn2-1.fna&oh=baa3f99a4d979cdb516f12dd98827d73&oe=5DACBA2D) !important;
+    /* color: white !important; */
+    /* background-repeat: no-repeat !important;
+    background-size: cover !important; */
+} 
+
+
+.MuiButton-label{
+    color: aliceblue !important;
+}
+
+.MuiButton-outlined{
+    border: 1px solid rgba(255, 255, 255, 0.23) !important;
+}
