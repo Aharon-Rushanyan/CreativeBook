@@ -18,7 +18,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Grid from '@material-ui/core/Grid';
 import MobileButtonsMenu from './MobileButtonsMenu';
 import './style.css';
-
+import HostingComponent from '../login/Animatlogin'
 const useStyles = makeStyles(theme => ({
     button: {
         margin: theme.spacing(1),
@@ -124,7 +124,7 @@ function PrimarySearchAppBar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+            <HostingComponent/>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
         </Menu>
     );

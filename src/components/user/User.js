@@ -42,6 +42,7 @@ class User extends React.Component {
             />
             <TextField
                 style={{ right: "250px" }}
+                disabled
                 //    onChange={mylogin}
                 label="Name"
                 name="Name"
@@ -51,10 +52,10 @@ class User extends React.Component {
                 style={{ left: '250px', top: '28px' }}
                 variant="contained"
                 color="primary"
-              //  onClick={() => addToDo(this.state.value)}
+            //  onClick={() => addToDo(this.state.value)}
             >
                 Save
-                                </Button>
+         </Button>
         </div>
         );
     }
