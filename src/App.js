@@ -1,6 +1,13 @@
 import React from 'react';
+
 import './App.css';
 import Book from './components/book/Book';
+
+import HostingComponent from '../src/testing'
+import './App.css';
+import Navbar from './components/Navbar/Navbar'
+import User from './user/User'
+
 
 
 
@@ -49,8 +56,9 @@ const books = [
   }
 ];
 function App() {
-  return (
-    <div className="App">
+
+  return (<div>
+             <div className="App">
       <div className="appContainer">
         <div className="booksWrapper">
         {books.map((book, i) => {
@@ -60,6 +68,11 @@ function App() {
       </div>
     </div>
   );
-}
+          <Navbar/>
+    <HostingComponent />
+    <User /></div>
+  )
+  
+
 
 export default App;
