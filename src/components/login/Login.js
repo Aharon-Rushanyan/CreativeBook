@@ -1,4 +1,6 @@
 import React from 'react';
+import { useState } from 'react';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +14,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import firebase from 'firebase'
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -38,9 +41,40 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignIn() {
-  const classes = useStyles();
 
+
+
+
+
+const SignIn = function () {
+  const classes = useStyles();
+  const [login, setLogin] = useState();
+  const [password, setPassword] = useState();
+  // const [user, setUser] = useState(null);
+  const [err, setErr] = useState()
+
+  function inputLogin(e) {
+    setLogin(e.target.value)
+  }
+  function handleKeyPress(e) {
+    if (e.charCode === 13) {
+      debugger; signIn();
+    }
+  }
+
+  function inputPass(e) {
+    setPassword(e.target.value)
+  }
+  function signIn() {
+    firebase.auth().signInWithEmailAndPassword(login, password)
+      .then(function (user) {
+        // setUser(user)
+        // props.history.replace('./todolist')
+      })
+      .catch(function (error) {
+        setErr(error.message);
+      });
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -53,10 +87,13 @@ export default function SignIn() {
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
+
             variant="outlined"
             margin="normal"
             required
             fullWidth
+            onChange={inputLogin}
+            onKeyPress={handleKeyPress}
             id="email"
             label="Email Address"
             name="email"
@@ -68,6 +105,8 @@ export default function SignIn() {
             margin="normal"
             required
             fullWidth
+            onChange={inputPass}
+            onKeyPress={handleKeyPress}
             name="password"
             label="Password"
             type="password"
@@ -79,8 +118,9 @@ export default function SignIn() {
             label="Remember me"
           />
           <Button
-            type="submit"
+            // type="submit"
             fullWidth
+            onClick={signIn}
             variant="contained"
             color="primary"
             className={classes.submit}
@@ -100,10 +140,12 @@ export default function SignIn() {
             </Grid>
           </Grid>
         </form>
+        <div style={{ color: 'red' }}>{err}</div>
       </div>
       <Box mt={5}>
-     
+
       </Box>
     </Container>
   );
 }
+export default SignIn;
