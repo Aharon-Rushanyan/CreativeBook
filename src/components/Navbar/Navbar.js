@@ -18,7 +18,9 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Grid from '@material-ui/core/Grid';
 import MobileButtonsMenu from './MobileButtonsMenu';
 import './style.css';
-import HostingComponent from '../login/Animatlogin'
+import HostingComponent from '../login/Animatlogin';
+import { Link } from 'react-router-dom';
+
 const useStyles = makeStyles(theme => ({
     button: {
         margin: theme.spacing(1),
@@ -186,13 +188,19 @@ function PrimarySearchAppBar() {
                         <Grid item>
                             <ButtonGroup size="large" aria-label="small outlined button group">
                             <Button variant="outlined" size="large" color="secondary" className={classes.margin}>
+                                <Link to="/">
                                 HOME
+                                </Link>
                             </Button>
                             <Button variant="outlined" size="large" color="secondary" className={classes.margin}>
+                                <Link to="/mybook">
                                 MY BOOKS
+                                </Link>
                             </Button>
                             <Button variant="outlined" size="large" color="secondary" className={classes.margin}>
+                                <Link to="/forum">
                                 FORUM
+                                </Link>
                             </Button>
                             </ButtonGroup>
                         </Grid>
