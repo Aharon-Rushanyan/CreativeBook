@@ -39,8 +39,8 @@ function BookRender() {
   
     return (
         <div className="App">
-            <div className="appContainer">
-                <div className="booksWrapper">
+            <div className="appContainer container">
+                <div className="booksWrapper row">
                     {
                         book && book.map((bookas, i) => {
                             return <Book key={i} book={bookas} />;

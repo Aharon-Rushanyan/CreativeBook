@@ -1,31 +1,32 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-
 import Button from '@material-ui/core/Button';
 import firebase from 'firebase'
 
 class AddBook extends React.Component {
     state = {
-        title: "",
-        author: "",
-        description: "",
-        shortDescription: "",
         startDate: new Date(),
         endDate: new Date(),
-        comments: ["hhhhh", "kkkk"],
+        comments: [],
         rate: 5,
         status: 1,
-        page: 10,
-        pages: 400,
-        imageUrl: "https://images-eu.ssl-images-amazon.com/images/I/513XpOgZtiL.jpg",
+        currentPage: 10,
     }
 
     updateInput = (event) => this.setState({ [event.target.name]: event.target.value })
 
     handleAddClick = () => {
+        if(!this.state.ISBN || !this.state.title || !this.state.author || !this.state.description || 
+        !this.state.pages || !this.state.imageUrl){
+            return alert('chexav')
+        }
         const db = firebase.firestore();
         const booksRef = db.collection("bookslibrary").doc(this.state.ISBN);
-
+        // const userId = firebase.auth().currentUser.uid;
+        const userId = 55545454
+        this.setState({
+            userId
+        })
         booksRef.set({
             ...this.state
         });
@@ -35,105 +36,44 @@ class AddBook extends React.Component {
     render() {
         return (
             <div className='bookWrappers'>
+                <br/>
                 <TextField
-                    id="standard-dense"
-                    label="Title"
+                    label="Title *"
                     margin="dense"
                     name='title'
                     onChange={this.updateInput}
                 />
                 <br />
                 <TextField
-                    id="standard-dense"
-                    label="Author"
+                    label="Author *"
                     name='author'
                     margin="dense"
                     onChange={this.updateInput}
                 />
                 <br />
                 <TextField
-                    id="standard-dense"
-                    label="Description"
+                    label="Description *"
                     name='description'
                     margin="dense"
                     onChange={this.updateInput}
                 />
                 <br />
                 <TextField
-                    id="standard-dense"
-                    label="Shortdescription"
-                    name='shortDescription'
-                    margin="dense"
-                    onChange={this.updateInput}
-                />
-                <br />
-                <TextField
-                    id="standard-dense"
-                    label="startDate"
-                    name='startDate'
-                    margin="dense"
-                    onChange={this.updateInput}
-                />
-                <br />
-                <TextField
-                    id="standard-dense"
-                    label="endDate"
-                    name='endDate'
-                    margin="dense"
-                    onChange={this.updateInput}
-                />
-                <br />
-                <TextField
-                    id="standard-dense"
-                    label="comments"
-                    name='comments'
-                    margin="dense"
-                    onChange={this.updateInput}
-                />
-                <br />
-                <TextField
-                    id="standard-dense"
-                    label="rate"
-                    name='rate'
-                    margin="dense"
-                    onChange={this.updateInput}
-                />
-                <br />
-                <TextField
-                    id="standard-dense"
-                    label="status"
-                    name='status'
-                    margin="dense"
-                    onChange={this.updateInput}
-                />
-                <br />
-                <TextField
-                    id="standard-dense"
-                    label="page"
-                    name='page'
-                    margin="dense"
-                    onChange={this.updateInput}
-                />
-                <br />
-                <TextField
-                    id="standard-dense"
-                    label="pages"
+                    label="Pages *"
                     name='pages'
                     margin="dense"
                     onChange={this.updateInput}
                 />
                 <br />
                 <TextField
-                    id="standard-dense"
-                    label="imageUrl"
+                    label="ImageUrl *"
                     name='imageUrl'
                     margin="dense"
                     onChange={this.updateInput}
                 />
                 <br />
                 <TextField
-                    id="standard-dense"
-                    label="ISBN"
+                    label="ISBN *"
                     name='ISBN'
                     margin="dense"
                     onChange={this.updateInput}

@@ -2,10 +2,9 @@ import React from 'react';
 import './Book.css';
 import 'font-awesome/css/font-awesome.min.css';
 
-
 function Book(props) {
   return (
-    <div className="bookWrapper">
+    <div className="bookWrapper col-md-4">
       <h3>{props.book.title}</h3>
       <div className="bookInfo">
         <div className="imgWrapper">
