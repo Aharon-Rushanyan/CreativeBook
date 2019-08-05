@@ -3,18 +3,24 @@ import Login from './Login'
 import Popup from "reactjs-popup";
 import { Animated } from "react-animated-css";
 import MenuItem from '@material-ui/core/MenuItem'
-function HostingComponent() {
 
+class HostingComponent extends React.Component{
 
-    return (
-        <Popup trigger={<MenuItem className="button">My Profile</MenuItem>} modal >
-            <Animated animationIn="zoomInRight" animationOut="zoomOutDown" animationInDuration={1000} animationOutDuration={1000} isVisible={true}>
-                <Login />
-            </Animated>
-        </Popup>
-
-    );
-
-
+    render(){
+        return (
+            <Popup trigger={<MenuItem className="button">My Profile</MenuItem>} modal >
+               { close => (
+     
+               <Animated animationIn="zoomInRight" animationOut="zoomOutDown" animationInDuration={1000} animationOutDuration={1000} isVisible={true}>
+                     <Login close={close}></Login> 
+                    
+                </Animated>
+                ) }
+            </Popup>
+      );
+    
+    }
 }
+
+
 export default HostingComponent;
