@@ -14,16 +14,15 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Grid from '@material-ui/core/Grid';
 import MobileButtonsMenu from './MobileButtonsMenu';
 import './style.css';
 import HostingComponent from '../login/Animatlogin';
-import { Link } from 'react-router-dom';
+import { Link,withRouter } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     button: {
-        margin: theme.spacing(1),
+        margin: theme.spacing(1), 
     },
     input: {
         display: 'none',
@@ -90,7 +89,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function PrimarySearchAppBar() {
+function PrimarySearchAppBar(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -105,7 +104,9 @@ function PrimarySearchAppBar() {
     function handleMobileMenuClose() {
         setMobileMoreAnchorEl(null);
     }
-
+    function handlechangehistoryToHome(){
+        props.history.push({ pathname:'/' })
+    }
     function handleMenuClose() {
         setAnchorEl(null);
         handleMobileMenuClose();
@@ -126,7 +127,7 @@ function PrimarySearchAppBar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <HostingComponent/>
+           <HostingComponent/>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
         </Menu>
     );
@@ -177,32 +178,42 @@ function PrimarySearchAppBar() {
         <div className={classes.grow}>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography className={classes.title} variant="h6" noWrap>
+                    <Typography 
+                    onClick={()=>handlechangehistoryToHome()}
+                    className={classes.title}
+                     variant="h6" noWrap>
                         GREEN BOOK
                     </Typography>
 
                     <div className={classes.sectionMobile}>
                         <MobileButtonsMenu />
                     </div>
-                    <div className={classes.sectionDesktop}>
-                        <Grid item>
-                            <ButtonGroup size="large" aria-label="small outlined button group">
-                            <Button variant="outlined" size="large" color="secondary" className={classes.margin}>
-                                <Link to="/">
-                                HOME
-                                </Link>
+                    <div  className={classes.sectionDesktop}>
+                        <Grid item >
+                            <Link className='link' to='/' >
+                            <Button variant="outlined"
+                                size="large"     
+                                color="secondary"
+                                className={classes.margin}>
+                               Home
                             </Button>
-                            <Button variant="outlined" size="large" color="secondary" className={classes.margin}>
-                                <Link to="/mybook">
-                                MY BOOKS
-                                </Link>
+                            </Link>
+                            <Link className='link' to='/mybook' >
+                            <Button variant="outlined"
+                                size="large"
+                                color="secondary"
+                                className={classes.margin}>
+                                    MY BOOKS
                             </Button>
-                            <Button variant="outlined" size="large" color="secondary" className={classes.margin}>
-                                <Link to="/forum">
-                                FORUM
-                                </Link>
+                            </Link>
+                            <Link className='link' to= '/forum' >
+                            <Button variant="outlined"
+                                size="large"
+                                color="secondary"
+                                className={classes.margin}>
+                                    Forum
                             </Button>
-                            </ButtonGroup>
+                            </Link>
                         </Grid>
                     </div>
 
@@ -263,4 +274,4 @@ function PrimarySearchAppBar() {
 
 
 
-export default PrimarySearchAppBar;
+export default withRouter(PrimarySearchAppBar);

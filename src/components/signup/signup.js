@@ -77,6 +77,12 @@ export default function SignInSide(props) {
     function showError() {
         setOpen(true);
     }
+    function handlechangehistoryToHome(){
+      
+        props.history.push({ pathname:'/' })
+    
+    
+    }
     function handleClose(event, reason) {
         if (reason === 'clickaway') {
             return;
@@ -107,8 +113,9 @@ export default function SignInSide(props) {
                             firebase.auth().currentUser.updateProfile({
                                 displayName: name
                             })
-                        }
+                        }  handlechangehistoryToHome()
                     }
+                  
                 )
                 .catch(function(error){
                     console.log(error.message)

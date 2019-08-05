@@ -6,7 +6,10 @@ import { useEffect } from 'react'
 
 function BookRender() {
     const [book, setBook] = useState();
+
     useEffect(function fire() {
+        const abortController = new AbortController();
+        const signal = abortController.signal;
         const db = firebase.firestore();
         const books = db.collection("bookslibrary");
         books.get().then(querySnapshot => {
@@ -33,8 +36,10 @@ function BookRender() {
              })
              .catch(err => {
         });
-    },
-     []);
+        return function cleanup(){
+            abortController.abort()
+        }
+    }, []);
 
   
     return (
