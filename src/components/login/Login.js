@@ -14,7 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import firebase from '../Firebase/Firebase'
 import { withRouter,Link} from 'react-router-dom';
-
+import {connect} from 'react-redux'
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
@@ -70,9 +70,11 @@ const SignIn = function (props) {
 
 
 }
-  function signIn(props) {
+  function signIn() {
     firebase.auth().signInWithEmailAndPassword(login, password)
       .then(function (user) {
+        console.log(user)
+        props.initUser(user)
         // setUser(user)
      handlechangehistoryToHome();
       })
@@ -152,4 +154,13 @@ const SignIn = function (props) {
     </Container>
   );
 }
-export default withRouter(SignIn);
+export default connect(
+  state=>({
+    state:state,
+  }),
+  dispatch=>({
+    initUser:(userInfo)=>{
+      dispatch({type:'SIGN-IN',userSign:userInfo})
+    }
+  })
+)(withRouter(SignIn));

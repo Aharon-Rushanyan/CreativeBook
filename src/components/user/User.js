@@ -5,6 +5,7 @@ import Avatar from 'react-avatar';
 import TextField from '@material-ui/core/TextField';
 
 import Button from '@material-ui/core/Button';
+import {connect} from 'react-redux';
 
 class User extends React.Component {
     state = {
@@ -46,7 +47,7 @@ class User extends React.Component {
                 //    onChange={mylogin}
                 label="Name"
                 name="Name"
-                defaultValue={this.state.userName}
+                defaultValue={this.props.state.userName}
             />
             <Button
                 style={{ left: '250px', top: '28px' }}
@@ -60,4 +61,9 @@ class User extends React.Component {
         );
     }
 }
-export default User;
+export default connect(
+    state=>({
+        state:state,
+      }),
+      dispatch=>{}
+)(User);
