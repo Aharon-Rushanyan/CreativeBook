@@ -17,7 +17,7 @@ function Book(props) {
             <span>☆</span><span>☆</span>
             <span>☆</span>
           </p>
-          <p>{props.book.shortDescription}</p>
+          <p>{props.book.description}</p>
         </div>
       </div>
     </div>
