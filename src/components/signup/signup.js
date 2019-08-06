@@ -18,8 +18,12 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
 
+// import firebase from 'firebase/app'
+// import 'firebase/app'
+// import 'firebase/auth'
+// import 'firebase/firestore'
 
-import firebase from 'firebase'
+import firebase from '../Firebase/Firebase'
 
 const useStyles = makeStyles(theme => ({
     root: {

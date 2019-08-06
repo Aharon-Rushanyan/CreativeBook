@@ -1,5 +1,5 @@
 import React from 'react';
-import firebase from 'firebase';
+import firebase from '../Firebase/Firebase'
 import { useState } from 'react';
 import Book from './Book'
 import { useEffect } from 'react'
