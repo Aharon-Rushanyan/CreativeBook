@@ -10,7 +10,7 @@ function Book(props) {
         <div className="imgWrapper">
           <img className="bookImg" src={props.book.imageUrl} alt="img" />
         </div>
-        <div>   
+        <div>
           <p>{props.book.author}</p>
           <p className="bookRate">
             <span>☆</span><span>☆</span>
@@ -21,7 +21,6 @@ function Book(props) {
         </div>
       </div>
     </div>
-
   );
 }
 
