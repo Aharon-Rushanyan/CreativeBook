@@ -1,4 +1,4 @@
-import {createStore} from 'redux'
+import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import App from '../../App';
 import React from 'react'
@@ -18,16 +18,15 @@ function initUser(state = initialState, action) {
 }
 
 const store = createStore(initUser)
-console.log(store)
-store.subscribe(()=>{
-    console.log(store.getState().userName)
-})
 
-function Users(){
-    return(
+store.subscribe(() => console.log(store.getState()));
+
+function Users() {
+    return (
         <Provider store={store}>
-            <App/>
+            <App />
         </Provider>
     )
 }
+
 export default Users

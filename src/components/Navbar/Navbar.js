@@ -16,13 +16,13 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import MobileButtonsMenu from './MobileButtonsMenu';
-import './style.css';
 import HostingComponent from '../login/Animatlogin';
-import { Link,withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import './style.css';
 
 const useStyles = makeStyles(theme => ({
     button: {
-        margin: theme.spacing(1), 
+        margin: theme.spacing(1),
     },
     input: {
         display: 'none',
@@ -104,8 +104,8 @@ function PrimarySearchAppBar(props) {
     function handleMobileMenuClose() {
         setMobileMoreAnchorEl(null);
     }
-    function handlechangehistoryToHome(){
-        props.history.push({ pathname:'/' })
+    function handlechangehistoryToHome() {
+        props.history.push({ pathname: '/' })
     }
     function handleMenuClose() {
         setAnchorEl(null);
@@ -127,7 +127,7 @@ function PrimarySearchAppBar(props) {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-           <HostingComponent/>
+            <HostingComponent />
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
         </Menu>
     );
@@ -178,39 +178,39 @@ function PrimarySearchAppBar(props) {
         <div className={classes.grow}>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography 
-                    onClick={()=>handlechangehistoryToHome()}
-                    className={classes.title}
-                     variant="h6" noWrap>
+                    <Typography
+                        onClick={() => handlechangehistoryToHome()}
+                        className={classes.title}
+                        variant="h6" noWrap>
                         GREEN BOOK
                     </Typography>
 
                     <div className={classes.sectionMobile}>
                         <MobileButtonsMenu />
                     </div>
-                    <div  className={classes.sectionDesktop}>
+                    <div className={classes.sectionDesktop}>
                         <Grid item >
                             <Link className='link' to='/' >
-                            <Button variant="outlined"
-                                size="large"     
-                                color="secondary"
-                                className={classes.margin}>
-                               Home
+                                <Button variant="outlined"
+                                    size="large"
+                                    color="secondary"
+                                    className={classes.margin}>
+                                    Home
                             </Button>
                             </Link>
-                            <Link className='link' to='/mybook' >
-                            <Button variant="outlined"
-                                size="large"
-                                color="secondary"
-                                className={classes.margin}>
+                            <Link className='link' to='/mybook/all' >
+                                <Button variant="outlined"
+                                    size="large"
+                                    color="secondary"
+                                    className={classes.margin}>
                                     MY BOOKS
                             </Button>
                             </Link>
-                            <Link className='link' to= '/forum' >
-                            <Button variant="outlined"
-                                size="large"
-                                color="secondary"
-                                className={classes.margin}>
+                            <Link className='link' to='/forum' >
+                                <Button variant="outlined"
+                                    size="large"
+                                    color="secondary"
+                                    className={classes.margin}>
                                     Forum
                             </Button>
                             </Link>

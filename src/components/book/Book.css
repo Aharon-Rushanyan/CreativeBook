@@ -32,7 +32,7 @@
   .bookRate > span {
     display: inline-block;
     position: relative;
-    flex-width: 1.1em;
+    flex: 1.1em;
     cursor: pointer;
   }
 

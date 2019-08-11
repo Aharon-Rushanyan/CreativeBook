@@ -13,8 +13,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import firebase from '../Firebase/Firebase'
-import { withRouter,Link} from 'react-router-dom';
-import {connect} from 'react-redux'
+import { withRouter, Link } from 'react-router-dom';
+import { connect } from 'react-redux'
+
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
@@ -60,23 +61,40 @@ const SignIn = function (props) {
       debugger; signIn();
     }
   }
-
+  function createItem(user) {
+     console.log(user)
+     console.log(user.user.displayName)
+     console.log(user.uid)
+     console.log(user.photoURL)
+     sessionStorage.myname= user.user.displayName;
+     sessionStorage.myid= user.user.uid;
+     sessionStorage.myphotourl= user.user.photoURL;
+  }
+  function readValue() {
+    let x = sessionStorage.getItem("myname");
+    let y = sessionStorage.getItem("myid");
+    let z = sessionStorage.getItem("myphotourl");
+    console.log(x,y,z);
+  }
   function inputPass(e) {
     setPassword(e.target.value)
   }
-  function handlechangehistoryToHome(){
+  function handlechangehistoryToHome() {
     props.close();
-    props.history.replace({ pathname:'/' })
+    props.history.replace({ pathname: '/' })
 
 
-}
+  }
   function signIn() {
     firebase.auth().signInWithEmailAndPassword(login, password)
       .then(function (user) {
-        console.log(user)
-        props.initUser(user)
-        // setUser(user)
-     handlechangehistoryToHome();
+        // console.log(user)
+        debugger;
+        createItem(user);
+        readValue();
+        props.initUser(user);
+
+        handlechangehistoryToHome();
       })
       .catch(function (error) {
         setErr(error.message);
@@ -154,13 +172,8 @@ const SignIn = function (props) {
     </Container>
   );
 }
-export default connect(
-  state=>({
-    state:state,
-  }),
-  dispatch=>({
-    initUser:(userInfo)=>{
-      dispatch({type:'SIGN-IN',userSign:userInfo})
-    }
+
+export default connect(state => ({
+    state: state,
   })
 )(withRouter(SignIn));

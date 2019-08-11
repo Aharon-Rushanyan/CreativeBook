@@ -32,6 +32,12 @@ class User extends React.Component {
 
         reader.readAsDataURL(file)
     }
+readValue() {
+        let x = sessionStorage.getItem("myname");
+        let y = sessionStorage.getItem("myid");
+        let z = sessionStorage.getItem("myphotourl");
+        console.log(x,y,z);
+      }
     render() {
         return (<div>
             <Avatar className="avatar" size="200"
@@ -47,13 +53,13 @@ class User extends React.Component {
                 //    onChange={mylogin}
                 label="Name"
                 name="Name"
-                defaultValue={this.props.state.userName}
+                defaultValue={"this.props.state.userName"}
             />
             <Button
                 style={{ left: '250px', top: '28px' }}
                 variant="contained"
                 color="primary"
-            //  onClick={() => addToDo(this.state.value)}
+             onClick={() =>this.readValue()}
             >
                 Save
          </Button>

@@ -47,7 +47,7 @@ class User extends React.Component {
                 //    onChange={mylogin}
                 label="Name"
                 name="Name"
-                defaultValue={this.props.state.userName}
+                defaultValue={this.props.state.userName || undefined}
             />
             <Button
                 style={{ left: '250px', top: '28px' }}
