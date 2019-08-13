@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import firebase from '../Firebase/Firebase';
-import BookMenu from '../bookmenu';
+import BookMenu from '../BookMenu/bookmenu';
 import Book from '../book/Book';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-export default class Test extends React.Component {
+
+export default class MyBooks extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            all: [],
             read: [],
             reading: [],
             willread: [],
@@ -58,23 +58,30 @@ export default class Test extends React.Component {
 
         return (
             <>
-             <Select
-          
-          
+
+<Select
+          value='{values.age'
+        left='200px'
           inputProps={{
             name: 'age',
             id: 'age-simple',
           }}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-                <BookMenu />
-                <Link to="/mybook/read" >read</Link>
-                <Link to="/mybook/reading" >reading</Link>
-                <Link to="/mybook/all" >all</Link>
-                <Link to="/mybook/willread" >willread</Link>
+                   <Link className='link' to='all' >
+                         <MenuItem>All</MenuItem>  
+                  </Link>   aa
+               
+                    <Link className='link' to='read' >
+                        <MenuItem >Read</MenuItem>
+                    </Link>
+                    <Link className='link' to='reading' >
+                        <MenuItem>Reading</MenuItem>
+                    </Link>
+                    <Link className='link' to='willread' >
+                        <MenuItem>Will read</MenuItem>
+                    </Link>
+                </Select>
+                {/* <BookMenu /> */}
                 <div>
                     {
                         this.state[key] && this.state[key].map(book => book ? <Book book={book} key={book.ISBN} /> : null)

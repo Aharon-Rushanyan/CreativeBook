@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -19,6 +19,7 @@ import MobileButtonsMenu from './MobileButtonsMenu';
 import HostingComponent from '../login/Animatlogin';
 import { Link, withRouter } from "react-router-dom";
 import './style.css';
+import firebase from '../Firebase/Firebase'
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -97,6 +98,8 @@ function PrimarySearchAppBar(props) {
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+
+
     function handleProfileMenuOpen(event) {
         setAnchorEl(event.currentTarget);
     }
@@ -107,6 +110,16 @@ function PrimarySearchAppBar(props) {
     function handlechangehistoryToHome() {
         props.history.push({ pathname: '/' })
     }
+    function signOut() {
+        firebase.auth().signOut().then(function () {
+            // Sign-out successful.
+        }).catch(function (error) {
+            // An error happened.
+        });
+        sessionStorage.clear();
+        handleMenuClose()
+    }
+
     function handleMenuClose() {
         setAnchorEl(null);
         handleMobileMenuClose();
@@ -127,52 +140,83 @@ function PrimarySearchAppBar(props) {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <HostingComponent />
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <Link className='link' to='/user'>
+                <MenuItem onClick={handleMenuClose}>My Profile</MenuItem>
+            </Link>
+            <Link className='link' to='/'>
+                <MenuItem onClick={signOut}>Sign out</MenuItem>
+            </Link>
         </Menu>
     );
 
+    // user menu for mobile 
 
-    const mobileMenuId = 'primary-search-account-menu-mobile';
-    const renderMobileMenu = (
-        <Menu
-            anchorEl={mobileMoreAnchorEl}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            id={mobileMenuId}
-            keepMounted
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-            open={isMobileMenuOpen}
-            onClose={handleMobileMenuClose}
+    // const mobileMenuId = 'primary-search-account-menu-mobile';
+    // const renderMobileMenu = (
+    //     <Menu
+    //         anchorEl={mobileMoreAnchorEl}
+    //         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+    //         id={mobileMenuId}
+    //         keepMounted
+    //         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+    //         open={isMobileMenuOpen}
+    //         onClose={handleMobileMenuClose}
+    //     >
+    //         <MenuItem>
+    //             <IconButton aria-label="show 4 new mails" color="inherit">
+    //                 <Badge badgeContent={4} color="secondary">
+    //                     <MailIcon />
+    //                 </Badge>
+    //             </IconButton>
+    //             <p>Messages</p>
+    //         </MenuItem>
+    //         <MenuItem>
+    //             <IconButton aria-label="show 11 new notifications" color="inherit">
+    //                 <Badge badgeContent={11} color="secondary">
+    //                     <NotificationsIcon />
+    //                 </Badge>
+    //             </IconButton>
+    //             <p>Notifications</p>
+    //         </MenuItem>
+    //         <MenuItem onClick={handleProfileMenuOpen}>
+    //             <IconButton
+    //                 aria-label="account of current user"
+    //                 aria-controls="primary-search-account-menu"
+    //                 aria-haspopup="true"
+    //                 color="inherit"
+    //             >
+    //                 <AccountCircle />
+    //             </IconButton>
+    //             <p>Profile</p>
+    //         </MenuItem>
+    //     </Menu>
+    // );
+
+    const userInfo = <div className={classes.sectionDesktop}>
+        {/* messages and notification menu */}
+        {/* <IconButton aria-label="show 4 new mails" color="inherit">
+            <Badge badgeContent={4} color="secondary">
+                <MailIcon />
+            </Badge>
+        </IconButton>
+        <IconButton aria-label="show 17 new notifications" color="inherit">
+            <Badge badgeContent={17} color="secondary">
+                <NotificationsIcon />
+            </Badge>
+        </IconButton> */}
+        <IconButton
+            edge="end"
+            aria-label="account of current user"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            onClick={handleProfileMenuOpen}
+            color="inherit"
         >
-            <MenuItem>
-                <IconButton aria-label="show 4 new mails" color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                        <MailIcon />
-                    </Badge>
-                </IconButton>
-                <p>Messages</p>
-            </MenuItem>
-            <MenuItem>
-                <IconButton aria-label="show 11 new notifications" color="inherit">
-                    <Badge badgeContent={11} color="secondary">
-                        <NotificationsIcon />
-                    </Badge>
-                </IconButton>
-                <p>Notifications</p>
-            </MenuItem>
-            <MenuItem onClick={handleProfileMenuOpen}>
-                <IconButton
-                    aria-label="account of current user"
-                    aria-controls="primary-search-account-menu"
-                    aria-haspopup="true"
-                    color="inherit"
-                >
-                    <AccountCircle />
-                </IconButton>
-                <p>Profile</p>
-            </MenuItem>
-        </Menu>
-    );
+            <AccountCircle />
+        </IconButton>
+    </div>
+
+    const signIn = <HostingComponent />
 
     return (
         <div className={classes.grow}>
@@ -231,17 +275,10 @@ function PrimarySearchAppBar(props) {
                         />
                     </div>
                     <div className={classes.grow} />
-                    <div className={classes.sectionDesktop}>
-                        <IconButton aria-label="show 4 new mails" color="inherit">
-                            <Badge badgeContent={4} color="secondary">
-                                <MailIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton aria-label="show 17 new notifications" color="inherit">
-                            <Badge badgeContent={17} color="secondary">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
+                    {sessionStorage.getItem("myid") ? userInfo : signIn}
+                    {/* {user && userInfo}
+                    {!user && signIn} */}
+                    <div className={classes.sectionMobile}>
                         <IconButton
                             edge="end"
                             aria-label="account of current user"
@@ -253,20 +290,9 @@ function PrimarySearchAppBar(props) {
                             <AccountCircle />
                         </IconButton>
                     </div>
-                    <div className={classes.sectionMobile}>
-                        <IconButton
-                            aria-label="show more"
-                            aria-controls={mobileMenuId}
-                            aria-haspopup="true"
-                            onClick={handleMobileMenuOpen}
-                            color="inherit"
-                        >
-                            <MoreIcon />
-                        </IconButton>
-                    </div>
                 </Toolbar>
             </AppBar>
-            {renderMobileMenu}
+            {/* {renderMobileMenu} */}
             {renderMenu}
         </div>
     );

@@ -1,8 +1,11 @@
 import React from 'react';
 import './Book.css';
 import 'font-awesome/css/font-awesome.min.css';
+import BookMenu from '../BookMenu/bookmenu'
+import {useEffect} from 'react'
 
 function Book(props) {
+
   return (
     <div className="bookWrapper col-md-4">
       <h3>{props.book.title}</h3>
@@ -19,6 +22,7 @@ function Book(props) {
           </p>
           <p>{props.book.description}</p>
         </div>
+        {sessionStorage.getItem("myid") && <BookMenu ISBN={props.book.ISBN}/> }
       </div>
     </div>
   );

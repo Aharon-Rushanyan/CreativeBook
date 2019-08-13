@@ -3,11 +3,11 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import firebase from './Firebase/Firebase';
+import firebase from '../Firebase/Firebase'
 
 const ITEM_HEIGHT = 48;
 
-export default function BookMenu() {
+export default function BookMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const user = firebase.auth().currentUser;
@@ -24,24 +24,24 @@ export default function BookMenu() {
   function handleRead() {
     const userinfo = db.collection("userinfo").doc(user.uid);
     userinfo.update({
-      myBooks: firebase.firestore.FieldValue.arrayUnion("ISBN"),
-      read: firebase.firestore.FieldValue.arrayUnion("ISBN")
+      all: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
+      read: firebase.firestore.FieldValue.arrayUnion(props.ISBN)
     });
     setAnchorEl(null);
   }
   function handleWillRead() {
     const userinfo = db.collection("userinfo").doc(user.uid);
     userinfo.update({
-      myBooks: firebase.firestore.FieldValue.arrayUnion("5170690908"),
-      willRead: firebase.firestore.FieldValue.arrayUnion("5170690908")
+      all: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
+      willread: firebase.firestore.FieldValue.arrayUnion(props.ISBN)
     });
     setAnchorEl(null);
   }
   function handleReading() {
     const userinfo = db.collection("userinfo").doc(user.uid);
     userinfo.update({
-      myBooks: firebase.firestore.FieldValue.arrayUnion("ISBN2"),
-      reading: firebase.firestore.FieldValue.arrayUnion("ISBN2")
+      all: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
+      reading: firebase.firestore.FieldValue.arrayUnion(props.ISBN)
     });
     setAnchorEl(null);
   }

@@ -30,7 +30,7 @@ function SimpleMenu() {
         onClose={handleClose}
       >
         <Link to='/' className='link'><MenuItem onClick={handleClose}>HOME</MenuItem></Link>
-        <Link to='/mybook' className='link'><MenuItem onClick={handleClose}>MY BOOKS</MenuItem></Link>
+        <Link to="/mybook/all" className='link'><MenuItem onClick={handleClose}>MY BOOKS</MenuItem></Link>
         <Link to='/forum' className='link'><MenuItem onClick={handleClose}>FORUM</MenuItem></Link>
       </Menu>
     </div>
