@@ -19,6 +19,7 @@ import MobileButtonsMenu from './MobileButtonsMenu';
 import './style.css';
 import HostingComponent from '../login/Animatlogin';
 import { Link,withRouter } from "react-router-dom";
+import firebase from 'firebase';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -93,6 +94,7 @@ function PrimarySearchAppBar(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    const [foundBook, setFoundBook] = React.useState(null)
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -174,6 +176,26 @@ function PrimarySearchAppBar(props) {
         </Menu>
     );
 
+    function onSearch(event) {
+        const db = firebase.firestore();
+        const booksRef = db.collection("bookslibrary");
+        if (event.target.value) {
+            const inputValue = event.target.value.toLowerCase();
+            return booksRef.get().then(res => {
+                const resultBooks = [];
+                res.forEach(book => {
+                    // console.log(book.data());
+                    if(book.data().title.indexOf(inputValue) > -1) {
+                        resultBooks.push(book.data());
+                    }
+                });
+                console.log(resultBooks);
+                setFoundBook(resultBooks)
+                return resultBooks;
+            });
+        }
+        return null;
+    }
     return (
         <div className={classes.grow}>
             <AppBar position="static">
@@ -222,6 +244,8 @@ function PrimarySearchAppBar(props) {
                             <SearchIcon />
                         </div>
                         <InputBase
+                            onChange={onSearch.bind(this)}
+
                             placeholder="Search book ..."
                             classes={{
                                 root: classes.inputRoot,
