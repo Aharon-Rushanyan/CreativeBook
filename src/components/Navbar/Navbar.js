@@ -278,7 +278,7 @@ function PrimarySearchAppBar(props) {
                     {sessionStorage.getItem("myid") ? userInfo : signIn}
                     {/* {user && userInfo}
                     {!user && signIn} */}
-                    <div className={classes.sectionMobile}>
+                    {sessionStorage.getItem("myid")&&<div className={classes.sectionMobile}>
                         <IconButton
                             edge="end"
                             aria-label="account of current user"
@@ -289,7 +289,7 @@ function PrimarySearchAppBar(props) {
                         >
                             <AccountCircle />
                         </IconButton>
-                    </div>
+                    </div>}
                 </Toolbar>
             </AppBar>
             {/* {renderMobileMenu} */}
