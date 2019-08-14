@@ -14,7 +14,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import firebase from '../Firebase/Firebase'
 import { withRouter, Link } from 'react-router-dom';
-import { connect } from 'react-redux'
+
+
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -62,20 +63,12 @@ const SignIn = function (props) {
     }
   }
   function createItem(user) {
-     console.log(user)
-     console.log(user.user.displayName)
-     console.log(user.uid)
-     console.log(user.photoURL)
+
      sessionStorage.myname= user.user.displayName;
      sessionStorage.myid= user.user.uid;
      sessionStorage.myphotourl= user.user.photoURL;
   }
-  function readValue() {
-    let x = sessionStorage.getItem("myname");
-    let y = sessionStorage.getItem("myid");
-    let z = sessionStorage.getItem("myphotourl");
-    console.log(x,y,z);
-  }
+
   function inputPass(e) {
     setPassword(e.target.value)
   }
@@ -91,8 +84,7 @@ const SignIn = function (props) {
         // console.log(user)
         debugger;
         createItem(user);
-        readValue();
-        props.initUser(user);
+        // props.initUser(user);
 
         handlechangehistoryToHome();
       })
@@ -173,7 +165,4 @@ const SignIn = function (props) {
   );
 }
 
-export default connect(state => ({
-    state: state,
-  })
-)(withRouter(SignIn));
+export default withRouter(SignIn);

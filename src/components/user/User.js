@@ -5,7 +5,7 @@ import Avatar from 'react-avatar';
 import TextField from '@material-ui/core/TextField';
 
 import Button from '@material-ui/core/Button';
-import {connect} from 'react-redux';
+
 
 class User extends React.Component {
     state = {
@@ -16,7 +16,13 @@ class User extends React.Component {
         imagePreviewUrl: "",
     }
 
-
+    componentDidMount() {
+        this.setState({
+            userName: sessionStorage.getItem("myname"),
+            userId: sessionStorage.getItem("myid"),
+            userPhoto: sessionStorage.getItem("myphotourl")
+        })
+    }
     _handleImageChange(e) {
         e.preventDefault();
 
@@ -32,12 +38,13 @@ class User extends React.Component {
 
         reader.readAsDataURL(file)
     }
-readValue() {
+    readValue() {
         let x = sessionStorage.getItem("myname");
         let y = sessionStorage.getItem("myid");
         let z = sessionStorage.getItem("myphotourl");
-        console.log(x,y,z);
-      }
+
+        console.log(x, y, z);
+    }
     render() {
         return (<div>
             <Avatar className="avatar" size="200"
@@ -51,15 +58,15 @@ readValue() {
                 style={{ right: "250px" }}
                 disabled
                 //    onChange={mylogin}
-                label="Name"
-                name="Name"
-                defaultValue={"this.props.state.userName"}
+                label={this.state.userName}
+                name='name'
+                defaultValue=""
             />
             <Button
                 style={{ left: '250px', top: '28px' }}
                 variant="contained"
                 color="primary"
-             onClick={() =>this.readValue()}
+                onClick={() => this.readValue()}
             >
                 Save
          </Button>
@@ -67,9 +74,5 @@ readValue() {
         );
     }
 }
-export default connect(
-    state=>({
-        state:state,
-      }),
-      dispatch=>{}
-)(User);
+
+export default User

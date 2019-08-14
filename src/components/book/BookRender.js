@@ -30,6 +30,7 @@ function BookRender() {
                         page: data.page,
                         pages: data.pages,
                         imageUrl: data.imageUrl,
+                        ISBN: data.ISBN
                     };
 
                     list.push(book);
