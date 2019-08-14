@@ -94,6 +94,7 @@ function PrimarySearchAppBar(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    const [foundBook,setFoundBook] = React.useState(null);
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -127,6 +128,27 @@ function PrimarySearchAppBar(props) {
 
     function handleMobileMenuOpen(event) {
         setMobileMoreAnchorEl(event.currentTarget);
+    }
+
+    function onSearch(event) {
+        const db = firebase.firestore();
+        const booksRef = db.collection("bookslibrary");
+        if (event.target.value) {
+            const inputValue = event.target.value.toLowerCase();
+            return booksRef.get().then(res => {
+                const resultBooks = [];
+                res.forEach(book => {
+                    // console.log(book.data());
+                    if(book.data().title.indexOf(inputValue) > -1) {
+                        resultBooks.push(book.data());
+                    }
+                });
+                console.log(resultBooks);
+                setFoundBook(resultBooks)
+                return resultBooks;
+            });
+        }
+        return null;
     }
 
     const menuId = 'primary-search-account-menu';
@@ -267,6 +289,7 @@ function PrimarySearchAppBar(props) {
                         </div>
                         <InputBase
                             placeholder="Search book ..."
+                            onChange={onSearch.bind(this)}
                             classes={{
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
