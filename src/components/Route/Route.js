@@ -7,7 +7,7 @@ import BookRender from '../book/BookRender';
 import AddBook from '../addbook/Addbook';
 import Forum from '../forum/forum';
 import Mybooks from '../mybooks/Mybooks';
-
+import SearchResult from '../SearchResult/SearchResult'
 
 export default function Routing() {
     return (
@@ -21,6 +21,7 @@ export default function Routing() {
                     <Route path="/addbook" component={AddBook} />
                     <Route path="/mybook/:key(all|read|reading|willread)" component={Mybooks} />
                     <Route path="/forum" component={Forum} />
+                    <Route path="/searchresult" component={SearchResult} />
                     <Route render={() => <h1>Page Not Found Apush</h1>} />
                 </Switch>
                 <input

@@ -28,7 +28,8 @@ class AddBook extends React.Component {
             userId
         })
         booksRef.set({
-            ...this.state
+            ...this.state,
+            title: this.state.title.toLowerCase()
         });
     }
 

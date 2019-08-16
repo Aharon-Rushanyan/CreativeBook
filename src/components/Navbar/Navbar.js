@@ -20,6 +20,7 @@ import HostingComponent from '../login/Animatlogin';
 import { Link, withRouter } from "react-router-dom";
 import './style.css';
 import firebase from '../Firebase/Firebase'
+import SearchField from '../SearchField/SearchField';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -60,7 +61,7 @@ const useStyles = makeStyles(theme => ({
         width: theme.spacing(7),
         height: '100%',
         position: 'absolute',
-        pointerEvents: 'none',
+        // pointerEvents: 'none',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -283,20 +284,8 @@ function PrimarySearchAppBar(props) {
                         </Grid>
                     </div>
 
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon />
-                        </div>
-                        <InputBase
-                            placeholder="Search book ..."
-                            onChange={onSearch.bind(this)}
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </div>
+                    <SearchField/>
+                    {/* <div></div> */}
                     <div className={classes.grow} />
                     {sessionStorage.getItem("myid") ? userInfo : signIn}
                     {/* {user && userInfo}

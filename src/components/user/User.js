@@ -8,6 +8,9 @@ import Button from '@material-ui/core/Button';
 
 
 class User extends React.Component {
+    constructor(props){
+        super(props)
+    }
     state = {
         userId: "",
         userName: "",
@@ -62,6 +65,7 @@ class User extends React.Component {
                 name='name'
                 defaultValue=""
             />
+            <div>{console.log(this.props.location.foundBook)}</div>
             <Button
                 style={{ left: '250px', top: '28px' }}
                 variant="contained"
