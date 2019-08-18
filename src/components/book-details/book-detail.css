@@ -1,0 +1,30 @@
+.details-container{
+    display: flex;
+    padding-top: 30px;
+}
+.poster{
+    display: flex;
+}
+.poster img{
+    width: 200px;
+    height: auto;
+}
+.author span{
+    text-decoration: underline;
+    color: rgb(0, 115, 255);
+}
+
+.info{
+    padding-left: 20px;
+}
+
+.pages{
+    font-size: 14px;
+    color: gray;
+}
+
+.filled:before {
+    content: "\2605";
+    position: absolute;
+    color: gold;
+ }

@@ -88,13 +88,29 @@ const useStyles = makeStyles(theme => ({
             display: 'none',
         },
     },
+    
 }));
 
 function PrimarySearchAppBar(props) {
+
+    useEffect(() => {
+        document.addEventListener('click',e => {
+            if(e.target.id === 'search-input'){
+                setIsSearching(true);
+            }
+            else{
+                setIsSearching(false);
+            }
+        })
+
+    },[])
+
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     const [foundBook,setFoundBook] = React.useState(null);
+    const [searchResults,setSearchResults] = React.useState([])
+    const [isSearching,setIsSearching] = React.useState(false);
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -131,24 +147,30 @@ function PrimarySearchAppBar(props) {
     }
 
     function onSearch(event) {
+
         const db = firebase.firestore();
         const booksRef = db.collection("bookslibrary");
-        if (event.target.value) {
+
             const inputValue = event.target.value.toLowerCase();
-            return booksRef.get().then(res => {
-                const resultBooks = [];
-                res.forEach(book => {
-                    // console.log(book.data());
-                    if(book.data().title.indexOf(inputValue) > -1) {
-                        resultBooks.push(book.data());
-                    }
-                });
-                console.log(resultBooks);
-                setFoundBook(resultBooks)
-                return resultBooks;
+            booksRef.get().then(res => {
+                if(!inputValue) {
+                    setSearchResults([]);
+                    return;
+                }else{
+                    const resultBooks = [];
+                    res.forEach(book => {
+                        if(book.data().title.indexOf(inputValue) > -1) {
+                            resultBooks.push(book.data());
+                        }
+                    });
+
+                    setFoundBook(resultBooks);
+                    setSearchResults(resultBooks);
+
+                }
+
+
             });
-        }
-        return null;
     }
 
     const menuId = 'primary-search-account-menu';
@@ -288,6 +310,7 @@ function PrimarySearchAppBar(props) {
                             <SearchIcon />
                         </div>
                         <InputBase
+                            id="search-input"
                             placeholder="Search book ..."
                             onChange={onSearch.bind(this)}
                             classes={{
@@ -296,6 +319,14 @@ function PrimarySearchAppBar(props) {
                             }}
                             inputProps={{ 'aria-label': 'search' }}
                         />
+                        <div style={{visibility: isSearching ? 'visible' : 'hidden'}} className="search-result-box">
+                            {searchResults.map((book,index) => (
+                                <Link key={index} to={`book/${book.ISBN}`}  style={{textDecoration: 'none'}}>
+                                <div className="search-result-item">{book.title}</div>
+                                </Link>
+                                
+                            ))}
+                        </div>
                     </div>
                     <div className={classes.grow} />
                     {sessionStorage.getItem("myid") ? userInfo : signIn}

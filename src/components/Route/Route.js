@@ -1,12 +1,14 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import React from 'react';
-import Navbar from '../Navbar/Navbar'
-import User from '../user/User'
-import SignInSide from '../signup/signup'
+import Navbar from '../Navbar/Navbar';
+import User from '../user/User';
+import SignInSide from '../signup/signup';
 import BookRender from '../book/BookRender';
 import AddBook from '../addbook/Addbook';
 import Forum from '../forum/forum';
 import Mybooks from '../mybooks/Mybooks';
+import Booktable from '../Booktable/Booktable';
+import BookDetail from '../book-details/book-detail';
 
 
 export default function Routing() {
@@ -21,6 +23,8 @@ export default function Routing() {
                     <Route path="/addbook" component={AddBook} />
                     <Route path="/mybook/:key(all|read|reading|willread)" component={Mybooks} />
                     <Route path="/forum" component={Forum} />
+                    <Route path="/table" component={Booktable} />
+                    <Route path="/book/:id" component={BookDetail} />
                     <Route render={() => <h1>Page Not Found Apush</h1>} />
                 </Switch>
                 <input
