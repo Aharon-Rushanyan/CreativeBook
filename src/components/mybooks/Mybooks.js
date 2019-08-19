@@ -4,7 +4,7 @@ import firebase from '../Firebase/Firebase';
 import BookMenu from '../BookMenu/bookmenu';
 import Book from '../book/Book';
 import Button from '@material-ui/core/Button';
-
+import Signup from '../signup/signup'
 
 export default class Test extends React.Component {
     constructor(props) {
@@ -21,8 +21,9 @@ export default class Test extends React.Component {
         let db = firebase.firestore();
         // const user = firebase.auth().currentUser;
         let booksref = db.collection("bookslibrary");
-        let userinforef = db.collection("userinfo").doc(sessionStorage.getItem("myid"));
+        let userinforef = sessionStorage.getItem("myid")?db.collection("userinfo").doc(sessionStorage.getItem("myid")):null;
 
+        if(userinforef){
         userinforef
             .get()
             .then(doc => {
@@ -52,11 +53,11 @@ export default class Test extends React.Component {
             })
             .catch(err => console.error(err.message));
     }
-
+    }
     render() {
         const { match: { params: { key } } } = this.props;
 
-        return (
+        return (sessionStorage.getItem("myid")?
             <>
                 <div className="flex-container2">
 
@@ -100,7 +101,7 @@ export default class Test extends React.Component {
                                 }
                             </div></div></div>
                 </div>
-            </>
+            </>:<Signup/>
         );
     }
 }
