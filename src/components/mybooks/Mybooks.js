@@ -5,6 +5,7 @@ import BookMenu from '../BookMenu/bookmenu';
 import Book from '../book/Book';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Signup from '../signup/signup'
 
 export default class MyBooks extends React.Component {
     constructor(props) {
@@ -21,9 +22,10 @@ export default class MyBooks extends React.Component {
         let db = firebase.firestore();
         // const user = firebase.auth().currentUser;
         let booksref = db.collection("bookslibrary");
-        let userinforef = db.collection("userinfo").doc(sessionStorage.getItem("myid"));
+        let userinforef = sessionStorage.getItem("myid")?db.collection("userinfo").doc(sessionStorage.getItem("myid")):null;
 
-        userinforef
+        if(userinforef){
+            userinforef
             .get()
             .then(doc => {
                 if (doc.exists) {
@@ -51,12 +53,13 @@ export default class MyBooks extends React.Component {
                 }
             })
             .catch(err => console.error(err.message));
+        }
     }
 
     render() {
         const { match: { params: { key } } } = this.props;
 
-        return (
+        return (sessionStorage.getItem("myid")?
             <>
 
 <Select
@@ -81,13 +84,12 @@ export default class MyBooks extends React.Component {
                         <MenuItem>Will read</MenuItem>
                     </Link>
                 </Select>
-                {/* <BookMenu /> */}
                 <div>
                     {
                         this.state[key] && this.state[key].map(book => book ? <Book book={book} key={book.ISBN} /> : null)
                     }
                 </div>
-            </>
+            </>:<Signup/>
         );
     }
 }
