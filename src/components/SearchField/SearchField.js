@@ -4,16 +4,20 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import firebase from '../Firebase/Firebase';
 import { Link, withRouter } from "react-router-dom";
+import SearchResult from '../SearchResult/SearchResult';
+
 
 import { useEffect } from 'react';
 
 const useStyles = makeStyles(theme => ({
+
     input: {
         display: 'none',
     },
     grow: {
         flexGrow: 1,
     },
+
     search: {
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
@@ -61,6 +65,7 @@ const useStyles = makeStyles(theme => ({
             display: 'none',
         },
     },
+
     
 }));
 
@@ -81,6 +86,7 @@ function SearchField() {
         })
 
     },[])
+
 
     function onSearch(event) {
         const db = firebase.firestore();
@@ -106,6 +112,7 @@ function SearchField() {
 
     return (
         <div className={classes.search}>
+
                         <div className={classes.searchIcon}>
                             <SearchIcon />
                         </div>
@@ -128,6 +135,8 @@ function SearchField() {
                             ))}
                         </div>
                     </div>);
+
+
 }
 
 export default SearchField;

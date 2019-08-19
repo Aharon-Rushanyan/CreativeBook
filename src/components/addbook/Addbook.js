@@ -29,6 +29,7 @@ class AddBook extends React.Component {
         })
         booksRef.set({
             ...this.state,
+
            title: this.state.title.toLowerCase()
         });
     }

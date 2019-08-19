@@ -14,7 +14,10 @@ import HostingComponent from '../login/Animatlogin';
 import { Link, withRouter } from "react-router-dom";
 import './style.css';
 import firebase from '../Firebase/Firebase'
+
 import SearchField from '../SearchField/SearchField'
+
+import SearchField from '../SearchField/SearchField';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -55,7 +58,7 @@ const useStyles = makeStyles(theme => ({
         width: theme.spacing(7),
         height: '100%',
         position: 'absolute',
-        pointerEvents: 'none',
+        // pointerEvents: 'none',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -92,6 +95,7 @@ function PrimarySearchAppBar(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -260,12 +264,14 @@ function PrimarySearchAppBar(props) {
                             </Link>
                         </Grid>
                     </div>
+
                     <SearchField/>
+
                     <div className={classes.grow} />
                     {sessionStorage.getItem("myid") ? userInfo : signIn}
                     {/* {user && userInfo}
                     {!user && signIn} */}
-                    {sessionStorage.getItem("myid")&&<div className={classes.sectionMobile}>
+                    {sessionStorage.getItem("myid") && <div className={classes.sectionMobile}>
                         <IconButton
                             edge="end"
                             aria-label="account of current user"
