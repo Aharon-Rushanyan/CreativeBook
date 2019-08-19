@@ -49,6 +49,7 @@ export default function BookMenu(props) {
   return (
     <div>
       <IconButton
+      style={{outline: 'none'}}
         aria-label="more"
         aria-controls="long-menu"
         aria-haspopup="true"

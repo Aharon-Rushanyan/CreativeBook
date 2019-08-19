@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import firebase from '../Firebase/Firebase'
+import firebase from 'firebase'
 
 class AddBook extends React.Component {
     state = {
@@ -29,7 +29,8 @@ class AddBook extends React.Component {
         })
         booksRef.set({
             ...this.state,
-            title: this.state.title.toLowerCase()
+
+           title: this.state.title.toLowerCase()
         });
     }
 

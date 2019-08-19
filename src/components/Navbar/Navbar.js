@@ -4,15 +4,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import MobileButtonsMenu from './MobileButtonsMenu';
@@ -20,6 +14,9 @@ import HostingComponent from '../login/Animatlogin';
 import { Link, withRouter } from "react-router-dom";
 import './style.css';
 import firebase from '../Firebase/Firebase'
+
+import SearchField from '../SearchField/SearchField'
+
 import SearchField from '../SearchField/SearchField';
 
 const useStyles = makeStyles(theme => ({
@@ -89,13 +86,16 @@ const useStyles = makeStyles(theme => ({
             display: 'none',
         },
     },
+    
 }));
 
 function PrimarySearchAppBar(props) {
+
+
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-    const [foundBook, setFoundBook] = React.useState(null);
+
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -131,26 +131,7 @@ function PrimarySearchAppBar(props) {
         setMobileMoreAnchorEl(event.currentTarget);
     }
 
-    function onSearch(event) {
-        const db = firebase.firestore();
-        const booksRef = db.collection("bookslibrary");
-        if (event.target.value) {
-            const inputValue = event.target.value.toLowerCase();
-            return booksRef.get().then(res => {
-                const resultBooks = [];
-                res.forEach(book => {
-                    // console.log(book.data());
-                    if (book.data().title.indexOf(inputValue) > -1) {
-                        resultBooks.push(book.data());
-                    }
-                });
-                console.log(resultBooks);
-                setFoundBook(resultBooks)
-                return resultBooks;
-            });
-        }
-        return null;
-    }
+
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -284,8 +265,8 @@ function PrimarySearchAppBar(props) {
                         </Grid>
                     </div>
 
-                    <SearchField />
-                    {/* <div></div> */}
+                    <SearchField/>
+
                     <div className={classes.grow} />
                     {sessionStorage.getItem("myid") ? userInfo : signIn}
                     {/* {user && userInfo}

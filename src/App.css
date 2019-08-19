@@ -33,7 +33,10 @@
 }
 
 .booksWrapper{
-  display: flex;
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(0,370px));
+  grid-gap:15px;
+  padding: 20px;
 }
 
 .bookWrapper h3{
