@@ -123,7 +123,7 @@ function SearchField() {
                     foundBook: { foundBook }
                 }}
             >
-                <SearchIcon onClick={() => {setFoundBook(null) }} />
+                <SearchIcon onClick={() => { setFoundBook(null) }} />
             </Link>
         </div >);
 }
