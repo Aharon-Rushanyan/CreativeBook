@@ -95,7 +95,7 @@ function PrimarySearchAppBar(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-    const [foundBook,setFoundBook] = React.useState(null);
+    const [foundBook, setFoundBook] = React.useState(null);
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -140,7 +140,7 @@ function PrimarySearchAppBar(props) {
                 const resultBooks = [];
                 res.forEach(book => {
                     // console.log(book.data());
-                    if(book.data().title.indexOf(inputValue) > -1) {
+                    if (book.data().title.indexOf(inputValue) > -1) {
                         resultBooks.push(book.data());
                     }
                 });
@@ -284,13 +284,13 @@ function PrimarySearchAppBar(props) {
                         </Grid>
                     </div>
 
-                    <SearchField/>
+                    <SearchField />
                     {/* <div></div> */}
                     <div className={classes.grow} />
                     {sessionStorage.getItem("myid") ? userInfo : signIn}
                     {/* {user && userInfo}
                     {!user && signIn} */}
-                    {sessionStorage.getItem("myid")&&<div className={classes.sectionMobile}>
+                    {sessionStorage.getItem("myid") && <div className={classes.sectionMobile}>
                         <IconButton
                             edge="end"
                             aria-label="account of current user"
