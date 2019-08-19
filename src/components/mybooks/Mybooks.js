@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import firebase from '../Firebase/Firebase';
 import BookMenu from '../BookMenu/bookmenu';
 import Book from '../book/Book';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import Signup from '../signup/signup'
+import Button from '@material-ui/core/Button';
 
-export default class MyBooks extends React.Component {
+
+export default class Test extends React.Component {
     constructor(props) {
         super(props);
 
@@ -22,10 +21,9 @@ export default class MyBooks extends React.Component {
         let db = firebase.firestore();
         // const user = firebase.auth().currentUser;
         let booksref = db.collection("bookslibrary");
-        let userinforef = sessionStorage.getItem("myid")?db.collection("userinfo").doc(sessionStorage.getItem("myid")):null;
+        let userinforef = db.collection("userinfo").doc(sessionStorage.getItem("myid"));
 
-        if(userinforef){
-            userinforef
+        userinforef
             .get()
             .then(doc => {
                 if (doc.exists) {
@@ -53,43 +51,56 @@ export default class MyBooks extends React.Component {
                 }
             })
             .catch(err => console.error(err.message));
-        }
     }
 
     render() {
         const { match: { params: { key } } } = this.props;
 
-        return (sessionStorage.getItem("myid")?
+        return (
             <>
+                <div className="flex-container2">
 
-<Select
-          value='{values.age'
-        left='200px'
-          inputProps={{
-            name: 'age',
-            id: 'age-simple',
-          }}
-        >
-                   <Link className='link' to='all' >
-                         <MenuItem>All</MenuItem>  
-                  </Link>   aa
-               
-                    <Link className='link' to='read' >
-                        <MenuItem >Read</MenuItem>
-                    </Link>
-                    <Link className='link' to='reading' >
-                        <MenuItem>Reading</MenuItem>
-                    </Link>
-                    <Link className='link' to='willread' >
-                        <MenuItem>Will read</MenuItem>
-                    </Link>
-                </Select>
-                <div>
-                    {
-                        this.state[key] && this.state[key].map(book => book ? <Book book={book} key={book.ISBN} /> : null)
-                    }
+                    <div className="flex-container">
+                    <Link className='link' to='all' >
+                    <Button variant="outlined" size="large" color="primary">
+                    MY Books
+        </Button>
+        </Link>
+                            <button className="item">
+                                
+                            </button>
+                        <Link className='link' to='read' >
+                            <button className="item" >
+                                Read
+                            </button></Link>
+                        <Link className='link' to='reading' >
+                            <button className="item">
+                                Reading
+                            </button></Link>
+                        <Link className='link' to='willread' >
+                            <button className="item" >
+                                I will read
+                            </button></Link>
+
+                        <div
+                            // type="button"
+                            className='goToup'
+                            onClick={() => window.scrollTo({
+                                top: 0,
+                                behavior: "smooth"
+                            })}
+                        />
+
+                    </div>
+                    <div className="myBookIMy">
+                        <div className="appContainer container">
+                            <div className="booksWrapper row">
+                                {
+                                    this.state[key] && this.state[key].map(book => book ? <Book book={book} key={book.ISBN} /> : null)
+                                }
+                            </div></div></div>
                 </div>
-            </>:<Signup/>
+            </>
         );
     }
 }
