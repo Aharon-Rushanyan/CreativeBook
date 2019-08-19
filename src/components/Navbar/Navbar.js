@@ -4,15 +4,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import MobileButtonsMenu from './MobileButtonsMenu';
@@ -20,6 +14,7 @@ import HostingComponent from '../login/Animatlogin';
 import { Link, withRouter } from "react-router-dom";
 import './style.css';
 import firebase from '../Firebase/Firebase'
+import SearchField from '../SearchField/SearchField'
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -93,24 +88,10 @@ const useStyles = makeStyles(theme => ({
 
 function PrimarySearchAppBar(props) {
 
-    useEffect(() => {
-        document.addEventListener('click',e => {
-            if(e.target.id === 'search-input'){
-                setIsSearching(true);
-            }
-            else{
-                setIsSearching(false);
-            }
-        })
-
-    },[])
 
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-    const [foundBook,setFoundBook] = React.useState(null);
-    const [searchResults,setSearchResults] = React.useState([])
-    const [isSearching,setIsSearching] = React.useState(false);
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -146,32 +127,7 @@ function PrimarySearchAppBar(props) {
         setMobileMoreAnchorEl(event.currentTarget);
     }
 
-    function onSearch(event) {
 
-        const db = firebase.firestore();
-        const booksRef = db.collection("bookslibrary");
-
-            const inputValue = event.target.value.toLowerCase();
-            booksRef.get().then(res => {
-                if(!inputValue) {
-                    setSearchResults([]);
-                    return;
-                }else{
-                    const resultBooks = [];
-                    res.forEach(book => {
-                        if(book.data().title.indexOf(inputValue) > -1) {
-                            resultBooks.push(book.data());
-                        }
-                    });
-
-                    setFoundBook(resultBooks);
-                    setSearchResults(resultBooks);
-
-                }
-
-
-            });
-    }
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -304,30 +260,7 @@ function PrimarySearchAppBar(props) {
                             </Link>
                         </Grid>
                     </div>
-
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon />
-                        </div>
-                        <InputBase
-                            id="search-input"
-                            placeholder="Search book ..."
-                            onChange={onSearch.bind(this)}
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                        <div style={{visibility: isSearching ? 'visible' : 'hidden'}} className="search-result-box">
-                            {searchResults.map((book,index) => (
-                                <Link key={index} to={`book/${book.ISBN}`}  style={{textDecoration: 'none'}}>
-                                <div className="search-result-item">{book.title}</div>
-                                </Link>
-                                
-                            ))}
-                        </div>
-                    </div>
+                    <SearchField/>
                     <div className={classes.grow} />
                     {sessionStorage.getItem("myid") ? userInfo : signIn}
                     {/* {user && userInfo}
