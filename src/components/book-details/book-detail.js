@@ -19,7 +19,16 @@ export default class BookDetail extends Component {
         const ref = firebase.firestore().collection('bookslibrary').doc(id);
         ref.get().then(doc => this.setState({book: doc.data()}));
     }
-
+    componentDidUpdate(){
+        const id = this.props.match.params.id;
+        if(this.props.match.params.id !== this.state.book.ISBN){
+            const ref = firebase.firestore().collection('bookslibrary').doc(id);
+            ref.get().then(doc => this.setState({book: doc.data()}));
+            console.log('hello')
+        }
+        
+        
+    }
     render(){
         const {book} = this.state
         if(!book){
