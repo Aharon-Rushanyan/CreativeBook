@@ -14,10 +14,8 @@ import HostingComponent from '../login/Animatlogin';
 import { Link, withRouter } from "react-router-dom";
 import './style.css';
 import firebase from '../Firebase/Firebase'
-
 import SearchField from '../SearchField/SearchField'
 
-import SearchField from '../SearchField/SearchField';
 
 const useStyles = makeStyles(theme => ({
     button: {
