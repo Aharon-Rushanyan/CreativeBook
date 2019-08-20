@@ -67,6 +67,7 @@ const SignIn = function (props) {
      sessionStorage.myname= user.user.displayName;
      sessionStorage.myid= user.user.uid;
      sessionStorage.myphotourl= user.user.photoURL;
+     sessionStorage.useremail = user.user.email
   }
 
   function inputPass(e) {

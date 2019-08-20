@@ -5,7 +5,7 @@ import BookMenu from '../BookMenu/bookmenu';
 import Book from '../book/Book';
 import Button from '@material-ui/core/Button';
 import Signup from '../signup/signup'
-
+import SimpleTable from '../SimpleTable/SimpleTable'
 export default class Test extends React.Component {
     constructor(props) {
         super(props);
@@ -93,13 +93,9 @@ export default class Test extends React.Component {
                         />
 
                     </div>
-                    <div className="myBookIMy">
-                        <div className="appContainer container">
-                            <div className="booksWrapper row">
-                                {
-                                    this.state[key] && this.state[key].map(book => book ? <Book book={book} key={book.ISBN} /> : null)
-                                }
-                            </div></div></div>
+                    {this.state[key] ?
+                    <SimpleTable  book={this.state[key]}/> :null
+               }
                 </div>
             </>:<Signup/>
         );

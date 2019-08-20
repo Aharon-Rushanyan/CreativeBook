@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import firebase from 'firebase'
+import firebase from '../Firebase/Firebase'
 
 class AddBook extends React.Component {
     state = {
