@@ -18,43 +18,43 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(title, author, rate, pages, ISBN) {
+  title=title.charAt(0).toUpperCase() + title.slice(1);
+  return { title, author, rate, pages, ISBN };
 }
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-export default function SimpleTable() {
+export default function SimpleTable(props) {
   const classes = useStyles();
 
+  const rows = 
+[
+  
+];
+props.book.map(book1 => rows.push(createData(book1.title,book1.author,book1.rate,
+  book1.pages,book1.ISBN)),console.log(rows));
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+          <TableCell>Title</TableCell>
+            <TableCell align="right">Author&nbsp;</TableCell>
+            <TableCell align="right">Rate&nbsp;</TableCell>
+            <TableCell align="right">Pages&nbsp;</TableCell>
+            <TableCell align="right">ISBN&nbsp;</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map(row => (
-            <TableRow key={row.name}>
+            <TableRow key={row.title}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.title}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+             
+              <TableCell align="right">{row.author}</TableCell>
+              <TableCell align="right">{row.rate}</TableCell>
+              <TableCell align="right">{row.pages}</TableCell>
+              <TableCell align="right">{row.ISBN}</TableCell>
             </TableRow>
           ))}
         </TableBody>
