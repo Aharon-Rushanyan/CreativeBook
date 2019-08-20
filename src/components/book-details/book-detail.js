@@ -31,7 +31,7 @@ export default class BookDetail extends Component {
     render() {
         const { book } = this.state
         if (!book) {
-            return <h1>Loading...</h1>
+            return <h1>hacking pentagon..</h1>
         } else {
             return (
                 <div className="details-container container">

@@ -15,7 +15,7 @@ import { Link, withRouter } from "react-router-dom";
 import './style.css';
 import firebase from '../Firebase/Firebase'
 import SearchField from '../SearchField/SearchField'
-
+import Logo from '../../logos/logo.png'
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -31,6 +31,8 @@ const useStyles = makeStyles(theme => ({
         marginRight: theme.spacing(2),
     },
     title: {
+        height: '20px',
+        width:'150px',
         marginRight: theme.spacing(2),
         display: 'none',
         [theme.breakpoints.up('sm')]: {
@@ -224,12 +226,12 @@ function PrimarySearchAppBar(props) {
         <div className={classes.grow}>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography
+                    <img src={Logo}
                         onClick={() => handlechangehistoryToHome()}
                         className={classes.title}
-                        variant="h6" noWrap>
-                        GREEN BOOK
-                    </Typography>
+                        variant="h6" noWrap/>
+                        {/* GREEN BOOK */}
+                    {/* </img> */}
 
                     <div className={classes.sectionMobile}>
                         <MobileButtonsMenu />
