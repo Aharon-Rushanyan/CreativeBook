@@ -30,6 +30,7 @@ export default function Routing() {
 
                     <Route path="/table" component={Booktable} />
                     <Route path="/book/:id" component={BookDetail} />
+                    <Route path="/mybook/book/:id" component={BookDetail} />
                     <Route path="/searchresult" component={SearchResult} />
                     <Route path="*" component={pageNotFound} />
 

@@ -229,7 +229,7 @@ function PrimarySearchAppBar(props) {
                     <img src={Logo}
                         onClick={() => handlechangehistoryToHome()}
                         className={classes.title}
-                        variant="h6" noWrap/>
+                        variant="h6"/>
                         {/* GREEN BOOK */}
                     {/* </img> */}
 
