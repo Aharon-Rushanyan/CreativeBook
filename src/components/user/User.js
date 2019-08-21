@@ -26,6 +26,11 @@ class User extends React.Component {
   };
 
   componentDidMount() {
+    this.setState({
+      userName: sessionStorage.getItem("myname"),
+      userId: sessionStorage.getItem("myid"),
+      userEmail: sessionStorage.getItem("useremail")
+    });
     const storageRef = firebase.storage().ref();
     storageRef
       .child("profilePhotos/" + sessionStorage.getItem("myid") + "_avatar.jpg")
@@ -35,12 +40,23 @@ class User extends React.Component {
 
         sessionStorage.myphotourl = photo;
         this.setState({
-          userName: sessionStorage.getItem("myname"),
-          userId: sessionStorage.getItem("myid"),
           userPhoto: sessionStorage.getItem("myphotourl")
         });
+      })
+      .catch(error => {
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
+        switch (error.code) {
+          case "storage/object-not-found":
+            console.log("avatar not set");
+            this.setState({
+              userPhoto: avatar
+            });
+            break;
+        }
       });
   }
+
   onOpenModal = () => {
     this.setState({ open: true });
   };
@@ -63,35 +79,58 @@ class User extends React.Component {
         },
         console.log(file)
       );
+      const storageRef = firebase.storage().ref();
+      storageRef
+        .child(
+          "profilePhotos/" + sessionStorage.getItem("myid") + "_avatar.jpg"
+        )
+        .put(this.state.file);
+
+      let photo =
+        "profilePhotos/" + sessionStorage.getItem("myid") + "_avatar.jpg";
+
+      const user = firebase.auth().currentUser;
+      if (user !== null) {
+        user.updateProfile({
+          photoURL: photo
+        });
+      }
+
+      storageRef
+        .child(photo)
+        .getDownloadURL()
+        .then(function(url) {
+          sessionStorage.myphotourl = url;
+        });
     };
 
     reader.readAsDataURL(file);
   }
-  readValue() {
-    let x = sessionStorage.getItem("myname");
-    let y = sessionStorage.getItem("myid");
-    let z = sessionStorage.getItem("myphotourl");
-    const storageRef = firebase.storage().ref();
-    storageRef.child("profilePhotos/" + y + "_avatar.jpg").put(this.state.file);
+  // readValue() {
+  //   let x = sessionStorage.getItem("myname");
+  //   let y = sessionStorage.getItem("myid");
+  //   let z = sessionStorage.getItem("myphotourl");
+  //   const storageRef = firebase.storage().ref();
+  //   storageRef.child("profilePhotos/" + y + "_avatar.jpg").put(this.state.file);
 
-    let photo = "profilePhotos/" + y + "_avatar.jpg";
+  //   let photo = "profilePhotos/" + y + "_avatar.jpg";
 
-    const user = firebase.auth().currentUser;
-    if (user !== null) {
-      user.updateProfile({
-        photoURL: photo
-      });
-    }
+  //   const user = firebase.auth().currentUser;
+  //   if (user !== null) {
+  //     user.updateProfile({
+  //       photoURL: photo
+  //     });
+  //   }
 
-    storageRef
-      .child(photo)
-      .getDownloadURL()
-      .then(function(url) {
-        sessionStorage.myphotourl = url;
-      });
+  //   storageRef
+  //     .child(photo)
+  //     .getDownloadURL()
+  //     .then(function(url) {
+  //       sessionStorage.myphotourl = url;
+  //     });
 
-    console.log(x, y, user.photoURL);
-  }
+  //   console.log(x, y, user.photoURL);
+  // }
   render() {
     const { open } = this.state;
     return (

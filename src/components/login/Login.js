@@ -60,15 +60,6 @@ const SignIn = function(props) {
     sessionStorage.useremail = user.user.email;
     sessionStorage.myname = user.user.displayName;
     sessionStorage.myid = user.user.uid;
-    const storageRef = firebase.storage().ref();
-    storageRef
-      .child(user.user.photoURL)
-      .getDownloadURL()
-      .then(function(url) {
-        let photo = url;
-        console.log(photo);
-        sessionStorage.myphotourl = photo;
-      });
   }
 
   function inputPass(e) {
