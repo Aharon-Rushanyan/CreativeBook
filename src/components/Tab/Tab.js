@@ -67,7 +67,7 @@ function VerticalTabs(props) {
     props.history.push({ pathname: `/mybook/reading` });
   }
   function willRead() {
-    props.history.push({ pathname: `/mybook/willRead` });
+    props.history.push({ pathname: `/mybook/willread` });
   }
 
   return (
