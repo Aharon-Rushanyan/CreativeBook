@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import '../user/user.css'
 import avatar from '../../logos/avatarRick.png';
 import {Link} from 'react-router-dom';
+import firebase from '../Firebase/Firebase'
 
   
 
