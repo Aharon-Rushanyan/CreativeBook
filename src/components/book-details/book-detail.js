@@ -37,7 +37,7 @@ export default class BookDetail extends Component {
                 <div className="details-container container">
                     <div className="poster">
                         <img src={book.imageUrl} />
-                        {sessionStorage.getItem("myid") && <BookMenu ISBN={book.ISBN} />}
+                        {sessionStorage.getItem("myid") && <BookMenu ISBN={book.ISBN} status={this.props.match} />}
                     </div>
                     <div className="info">
                         <h2 className="title">{book.title}</h2>

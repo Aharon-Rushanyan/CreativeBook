@@ -49,7 +49,7 @@ function BookRender() {
             <div className="appContainer container">
                 <div className="booksWrapper row">
                     {
-                        book && book.map(book => <Book key={book.ISBN} book={book} />)
+                        book && book.map(book => <Book key={book.ISBN} book={book} status = {{params: {key: "else"}}}  />)
                     }
                 </div>
             </div>

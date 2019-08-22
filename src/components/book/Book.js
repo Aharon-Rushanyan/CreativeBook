@@ -25,7 +25,7 @@ function Book(props) {
           <div className="main">
             <p>{props.book.author}</p>
             <div onClick={prevent}>
-            {sessionStorage.getItem("myid") && <BookMenu ISBN={props.book.ISBN}/> }
+            {sessionStorage.getItem("myid") && <BookMenu ISBN={props.book.ISBN} status = {props.status}/> }
             </div>
           </div>
           <p className="bookRate">
