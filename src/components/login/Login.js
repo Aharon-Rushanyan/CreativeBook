@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
 const SignIn = function(props) {
   const classes = useStyles();
   const [login, setLogin] = useState();
-  const [password, setPassword] = useState();
+  const [password, setPassword] = useState(); 
   const [err, setErr] = useState();
 
   function inputLogin(e) {
@@ -56,18 +56,9 @@ const SignIn = function(props) {
     }
   }
   function createItem(user) {
+    sessionStorage.useremail = user.user.email;
     sessionStorage.myname = user.user.displayName;
     sessionStorage.myid = user.user.uid;
-    sessionStorage.useremail = user.user.email;
-    const storageRef = firebase.storage().ref();
-    storageRef
-      .child(user.user.photoURL)
-      .getDownloadURL()
-      .then(function(url) {
-        let photo = url;
-        console.log(photo);
-        sessionStorage.myphotourl = photo;
-      });
   }
 
   function inputPass(e) {
