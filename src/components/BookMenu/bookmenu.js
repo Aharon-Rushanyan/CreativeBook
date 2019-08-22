@@ -23,8 +23,8 @@ export default function BookMenu(props) {
     setAnchorEl(null);
   }
 
-  function handleRead() {
-    console.log(props.status)
+  function handleRead() {    
+    console.log(location)
     const userinfo = db.collection("userinfo").doc(user.uid);
     userinfo.update({
       all: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
@@ -40,6 +40,18 @@ export default function BookMenu(props) {
         willread: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
       });
     }
+      if (location === "else" || location === undefined){
+        console.log(location)
+        userinfo.update({
+          all: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
+          read: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
+          reading: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
+          willread: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
+          reading: firebase.firestore.FieldValue.arrayRemove(props.ISBN),
+          willread: firebase.firestore.FieldValue.arrayRemove(props.ISBN),
+        })
+      }
+    
     setAnchorEl(null);
   }
   function handleWillRead() {
@@ -58,6 +70,17 @@ export default function BookMenu(props) {
         read: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
       });
     }
+    if (location === "else" || location === undefined){
+      console.log(location)
+      userinfo.update({
+        all: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
+        willread: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
+        reading: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
+        read: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
+        reading: firebase.firestore.FieldValue.arrayRemove(props.ISBN),
+        read: firebase.firestore.FieldValue.arrayRemove(props.ISBN),
+      })
+    }
     setAnchorEl(null);
   }
   function handleReading() {
@@ -75,6 +98,17 @@ export default function BookMenu(props) {
       userinfo.update({
         willread: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
       });
+    }
+    if (location === "else" || location === undefined){
+      console.log(location)
+      userinfo.update({
+        all: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
+        reading: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
+        willread: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
+        read: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
+        willread: firebase.firestore.FieldValue.arrayRemove(props.ISBN),
+        read: firebase.firestore.FieldValue.arrayRemove(props.ISBN),
+      })
     }
     setAnchorEl(null);
   }
@@ -98,6 +132,7 @@ export default function BookMenu(props) {
         reading: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
       });
     }
+    
     setAnchorEl(null);
   }
 
@@ -144,7 +179,7 @@ export default function BookMenu(props) {
               Reading Now
             </MenuItem>
           )}
-          {location !== "else" && (<MenuItem key={"remove"} selected={false} onClick={handleRemove}>
+          {location !== "else" &&  location &&(<MenuItem key={"remove"} selected={false} onClick={handleRemove}>
             Remove from my library
           </MenuItem>
           )}
