@@ -95,6 +95,11 @@ export default function SignInSide(props) {
       signup();
     }
   }
+  function createItem(user) {
+    sessionStorage.useremail = user.user.email;
+    sessionStorage.myname = user.user.displayName;
+    sessionStorage.myid = user.user.uid;
+  }
   function signup() {
     if (!name) {
       setErr("Please Enter Your Name");
@@ -109,7 +114,7 @@ export default function SignInSide(props) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(login, password)
-        .then(() => {
+        .then((us) => {
           const user = firebase.auth().currentUser;
                         if(user !== null){
                             user.updateProfile({
@@ -118,7 +123,6 @@ export default function SignInSide(props) {
                             const db = firebase.firestore();
                             const userinfo = db.collection("userinfo").doc(user.uid);
 
-
             userinfo.set({
               all: [],
               read: [],
@@ -126,6 +130,7 @@ export default function SignInSide(props) {
               reading: []
             });
           }
+          createItem(us)
           handlechangehistoryToHome();
         })
         .catch(function(error) {
