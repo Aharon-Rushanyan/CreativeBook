@@ -43,8 +43,7 @@ const useStyles = makeStyles(theme => ({
 const SignIn = function(props) {
   const classes = useStyles();
   const [login, setLogin] = useState();
-  const [password, setPassword] = useState();
-  // const [user, setUser] = useState(null);
+  const [password, setPassword] = useState(); 
   const [err, setErr] = useState();
 
   function inputLogin(e) {
