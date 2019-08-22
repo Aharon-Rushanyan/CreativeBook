@@ -67,7 +67,7 @@ export default class Test extends React.Component {
     <Tab/>
                     </div>
                     {this.state[key] ?
-                        <SimpleTable book={this.state[key]} /> : null
+                        <SimpleTable book={this.state[key]} status={this.props.match} /> : null
                     }
                 </div>
             </> : <Signup />
