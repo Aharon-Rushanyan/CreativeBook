@@ -102,7 +102,6 @@ class User extends React.Component {
         });
     };
 
-
     reader.readAsDataURL(file);
   }
 
@@ -147,7 +146,6 @@ class User extends React.Component {
                       ADD BOOK
                     </Button>
                   </Link>
-
                 </div>
               </div>
               <div className="col-md-8">
