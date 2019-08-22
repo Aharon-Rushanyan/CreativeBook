@@ -1,13 +1,6 @@
 import React from 'react';
-
-import Avatar from 'react-avatar';
-
-import TextField from '@material-ui/core/TextField';
-
 import Button from '@material-ui/core/Button';
 import '../user/user.css'
-import Modal from 'react-responsive-modal';
-import { blue } from '@material-ui/core/colors';
 import avatar from '../../logos/avatarRick.png';
 import {Link} from 'react-router-dom';
 
@@ -30,9 +23,30 @@ class User extends React.Component {
         this.setState({
             userName: sessionStorage.getItem("myname"),
             userId: sessionStorage.getItem("myid"),
-            userPhoto: sessionStorage.getItem("myphotourl") ? avatar : sessionStorage.getItem("myphotourl"),
-            userEmail: sessionStorage.getItem('useremail')
-        })
+            userEmail: sessionStorage.getItem("useremail")
+          });
+          const storageRef = firebase.storage().ref();
+          storageRef
+            .child("profilePhotos/" + sessionStorage.getItem("myid") + "_avatar.jpg")
+            .getDownloadURL()
+            .then(url => {
+              let photo = url;
+      
+              sessionStorage.myphotourl = photo;
+              this.setState({
+                userPhoto: sessionStorage.getItem("myphotourl")
+              });
+            })
+            .catch(error => {
+              switch (error.code) {
+                case "storage/object-not-found":
+                  console.log("avatar not set");
+                  this.setState({
+                    userPhoto: avatar
+                  });
+                  break;
+              }
+            });
     }
     onOpenModal = () => {
         this.setState({ open: true });
@@ -48,22 +62,41 @@ class User extends React.Component {
         let reader = new FileReader();
         let file = e.target.files[0];
 
-        reader.onloadend = () => {
-            this.setState({
-                file: file,
-                userPhoto: reader.result
-            }, console.log(file));
-        }
-
-        reader.readAsDataURL(file)
+        reader.onloadend = () => {this.setState(
+            {
+              file: file,
+              userPhoto: reader.result
+            },
+            console.log(file)
+          );
+          const storageRef = firebase.storage().ref();
+          storageRef
+            .child(
+              "profilePhotos/" + sessionStorage.getItem("myid") + "_avatar.jpg"
+            )
+            .put(this.state.file);
+    
+          let photo =
+            "profilePhotos/" + sessionStorage.getItem("myid") + "_avatar.jpg";
+    
+          const user = firebase.auth().currentUser;
+          if (user !== null) {
+            user.updateProfile({
+              photoURL: photo
+            });
+          }
+    
+          storageRef
+            .child(photo)
+            .getDownloadURL()
+            .then(function(url) {
+              sessionStorage.myphotourl = url;
+            });
+        };
+    
+        reader.readAsDataURL(file);
     }
-    readValue() {
-        let x = sessionStorage.getItem("myname");
-        let y = sessionStorage.getItem("myid");
-        let z = sessionStorage.getItem("myphotourl");
-
-        console.log(x, y, z);
-    }
+    
     render() {
         const { open } = this.state;
         return (
