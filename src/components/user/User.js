@@ -1,13 +1,6 @@
 import React from "react";
-
-import Avatar from "react-avatar";
-
-import TextField from "@material-ui/core/TextField";
-
 import Button from "@material-ui/core/Button";
 import "../user/user.css";
-import Modal from "react-responsive-modal";
-import { blue } from "@material-ui/core/colors";
 import avatar from "../../logos/avatarRick.png";
 import { Link } from "react-router-dom";
 import firebase from "../Firebase/Firebase";
