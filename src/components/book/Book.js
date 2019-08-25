@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import {useEffect} from 'react';
 
 function Book(props) {
-
   function prevent(e){
     e.preventDefault();
     e.stopPropagation();

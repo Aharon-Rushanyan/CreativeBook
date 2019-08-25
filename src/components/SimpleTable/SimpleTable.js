@@ -61,7 +61,7 @@ props.book.map(book1 => rows.push(createData(book1.title,book1.author,book1.rate
               <TableCell align="right">{row.rate}</TableCell>
               <TableCell align="right">{row.pages}</TableCell>
               <TableCell align="right">{row.ISBN}</TableCell>
-              <TableCell align="right"><BookMenu ISBN={row.ISBN} status={props.status}/></TableCell>
+              <TableCell align="right"><BookMenu propforupdate={props.propforupdate} ISBN={row.ISBN} status={props.status}/></TableCell>
             </TableRow>
           ))}
         </TableBody>

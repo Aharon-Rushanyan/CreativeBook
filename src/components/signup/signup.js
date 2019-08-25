@@ -16,6 +16,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
+import { withRouter} from "react-router-dom";
 
 // import firebase from 'firebase/app'
 // import 'firebase/app'
@@ -56,7 +57,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignInSide(props) {
+function SignInSide(props) {
   const classes = useStyles();
   const [name, setName] = useState();
   const [login, setLogin] = useState();
@@ -96,9 +97,9 @@ export default function SignInSide(props) {
     }
   }
   function createItem(user) {
-    sessionStorage.useremail = user.user.email;
-    sessionStorage.myname = user.user.displayName;
-    sessionStorage.myid = user.user.uid;
+    sessionStorage.useremail = user.email;
+    sessionStorage.myname = user.displayName;
+    sessionStorage.myid = user.uid;
   }
   function signup() {
     if (!name) {
@@ -130,7 +131,7 @@ export default function SignInSide(props) {
               reading: []
             });
           }
-          createItem(us)
+          createItem(user)
           handlechangehistoryToHome();
         })
         .catch(function(error) {
@@ -263,3 +264,5 @@ export default function SignInSide(props) {
     </div>
   );
 }
+
+export default withRouter(SignInSide)

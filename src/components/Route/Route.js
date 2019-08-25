@@ -5,13 +5,10 @@ import User from '../user/User';
 import SignInSide from '../signup/signup';
 import BookRender from '../book/BookRender';
 import AddBook from '../addbook/Addbook';
-import Forum from '../forum/forum';
+import Forum from '../forum/Forum/Forum';
 import Mybooks from '../mybooks/Mybooks';
 import Booktable from '../Booktable/Booktable';
 import BookDetail from '../book-details/book-detail';
-
-
-
 import SearchResult from '../SearchResult/SearchResult'
 import pageNotFound from '../pageNotFound/pageNotFound'
 
@@ -27,7 +24,7 @@ export default function Routing() {
                     <Route path="/addbook" component={AddBook} />
                     <Route path="/mybook/:key(all|read|reading|willread)" component={Mybooks} />
                     <Route path="/forum" component={Forum} />
-
+                    <Route path='/authorsbooks' component={BookRender}/>
                     <Route path="/table" component={Booktable} />
                     <Route path="/book/:id" component={BookDetail} />
                     <Route path="/mybook/book/:id" component={BookDetail} />

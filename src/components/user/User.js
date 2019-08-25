@@ -4,6 +4,7 @@ import "../user/user.css";
 import avatar from "../../logos/avatarRick.png";
 import { Link } from "react-router-dom";
 import firebase from "../Firebase/Firebase";
+import SignUp from '../signup/signup'
 
 class User extends React.Component {
   constructor(props) {
@@ -98,87 +99,87 @@ class User extends React.Component {
 
   render() {
     const { open } = this.state;
-    return (
-      <div className="user-conteiner">
-        <div className="container emp-profile">
-          <form method="post">
-            <div className="row">
-              <div className="col-md-4">
-                <div className="profile-img">
-                  <img src={this.state && this.state.userPhoto} />
-                  <div className="file btn btn-lg btn-primary">
-                    Change Photo
-                    <input
-                      className="fileInput"
-                      type="file"
-                      onChange={e => this._handleImageChange(e)}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="profile-head">
-                  <div className="user-name">{this.state.userName}</div>
-                  <p className="proile-rating">BOOK LOVER</p>
-                  <ul className="nav nav-tabs" id="myTab" role="tablist">
-                    <li className="nav-item">
-                      <div className="nav-link active">About</div>
-                    </li>
-                  </ul>
-                </div>
+    return (sessionStorage.getItem("myid")?<div className="user-conteiner">
+    <div className="container emp-profile">
+      <form method="post">
+        <div className="row">
+          <div className="col-md-4">
+            <div className="profile-img">
+              <img src={this.state && this.state.userPhoto} />
+              <div className="file btn btn-lg btn-primary">
+                Change Photo
+                <input
+                  className="fileInput"
+                  type="file"
+                  onChange={e => this._handleImageChange(e)}
+                />
               </div>
             </div>
-            <div className="row">
-              <div className="col-md-4">
-                <div className="profile-work">
-                  <div className="col-md-2" />
-                  <Link to="/addbook">
-                    <Button variant="contained" size="large" color="primary">
-                      ADD BOOK
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-              <div className="col-md-8">
-                <div className="tab-content profile-tab" id="myTabContent">
-                  <div
-                    className="tab-pane fade show active"
-                    id="home"
-                    role="tabpanel"
-                    aria-labelledby="home-tab"
-                  >
-                    <div className="row">
-                      <div className="col-md-6">
-                        <label>User Id</label>
-                      </div>
-                      <div className="col-md-6">
-                        <p>{this.state.userId}</p>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-md-6">
-                        <label>Name</label>
-                      </div>
-                      <div className="col-md-6">
-                        <p>{this.state.userName}</p>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-md-6">
-                        <label>Email</label>
-                      </div>
-                      <div className="col-md-6">
-                        <p>{this.state.userEmail}</p>
-                      </div>
-                    </div>
-                    <div className="row" />
-                  </div>
-                </div>
-              </div>
+          </div>
+          <div className="col-md-6">
+            <div className="profile-head">
+              <div className="user-name">{this.state.userName}</div>
+              <p className="proile-rating">BOOK LOVER</p>
+              <ul className="nav nav-tabs" id="myTab" role="tablist">
+                <li className="nav-item">
+                  <div className="nav-link active">About</div>
+                </li>
+              </ul>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
+        <div className="row">
+          <div className="col-md-4">
+            <div className="profile-work">
+              <div className="col-md-2" />
+              <Link to="/addbook">
+                <Button variant="contained" size="large" color="primary">
+                  ADD BOOK
+                </Button>
+              </Link>
+            </div>
+          </div>
+          <div className="col-md-8">
+            <div className="tab-content profile-tab" id="myTabContent">
+              <div
+                className="tab-pane fade show active"
+                id="home"
+                role="tabpanel"
+                aria-labelledby="home-tab"
+              >
+                <div className="row">
+                  <div className="col-md-6">
+                    <label>User Id</label>
+                  </div>
+                  <div className="col-md-6">
+                    <p>{this.state.userId}</p>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <label>Name</label>
+                  </div>
+                  <div className="col-md-6">
+                    <p>{this.state.userName}</p>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <label>Email</label>
+                  </div>
+                  <div className="col-md-6">
+                    <p>{this.state.userEmail}</p>
+                  </div>
+                </div>
+                <div className="row" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>:<SignUp/>
+      
     );
   }
 }

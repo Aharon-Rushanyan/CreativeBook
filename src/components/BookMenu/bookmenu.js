@@ -14,7 +14,7 @@ export default function BookMenu(props) {
   const user = firebase.auth().currentUser;
   const db = firebase.firestore();
   const location = props.status.params.key;
-
+let currentnum=true;
   function handleClick(event) {
     setAnchorEl(event.currentTarget);
   }
@@ -24,7 +24,7 @@ export default function BookMenu(props) {
   }
 
   function handleRead() {    
-    console.log(location)
+  
     const userinfo = db.collection("userinfo").doc(user.uid);
     userinfo.update({
       all: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
@@ -33,11 +33,15 @@ export default function BookMenu(props) {
     if (location === "reading") {
       userinfo.update({
         reading: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
+      }).then(()=>{
+        props. propforupdate(currentnum);
       });
     }
     if (location === "willread") {
       userinfo.update({
         willread: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
+      }).then(()=>{
+        props. propforupdate(true);
       });
     }
       if (location === "else" || location === undefined){
@@ -59,16 +63,16 @@ export default function BookMenu(props) {
     userinfo.update({
       all: firebase.firestore.FieldValue.arrayUnion(props.ISBN),
       willread: firebase.firestore.FieldValue.arrayUnion(props.ISBN)
-    });
+    })
     if (location === "reading") {
       userinfo.update({
         reading: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
-      });
+      }).then(()=>{props. propforupdate( true)});
     }
     if (location === "read") {
       userinfo.update({
         read: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
-      });
+      }).then(()=>{props. propforupdate( true)});
     }
     if (location === "else" || location === undefined){
       console.log(location)
@@ -92,12 +96,12 @@ export default function BookMenu(props) {
     if (location === "read") {
       userinfo.update({
         read: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
-      });
+      }).then(()=>{props. propforupdate( true)});
     }
     if (location === "willread") {
       userinfo.update({
         willread: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
-      });
+      }).then(()=>{props. propforupdate( true)});
     }
     if (location === "else" || location === undefined){
       console.log(location)
@@ -113,31 +117,32 @@ export default function BookMenu(props) {
     setAnchorEl(null);
   }
   function handleRemove() {
+    
     const userinfo = db.collection("userinfo").doc(user.uid);
     if (location === "read") {
       userinfo.update({
         all: firebase.firestore.FieldValue.arrayRemove(props.ISBN),
         read: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
-      });
+      }).then(()=>{props. propforupdate( true)});
     }
     if (location === "willread") {
       userinfo.update({
         all: firebase.firestore.FieldValue.arrayRemove(props.ISBN),
         willread: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
-      });
+      }).then(()=>{props. propforupdate( true)});
     }
     if (location === "reading") {
       userinfo.update({
         all: firebase.firestore.FieldValue.arrayRemove(props.ISBN),
         reading: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
-      });
+      }).then(()=>{props. propforupdate( true)});
     }
     
     setAnchorEl(null);
   }
 
   return (
-    location != "all" && (
+    location !== "all" && (
       <div>
         <IconButton
           aria-label="more"
