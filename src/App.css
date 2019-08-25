@@ -1,9 +1,9 @@
 .App {
   /* text-align: center; */
-  background-image: url(https://image.shutterstock.com/image-photo/pile-various-books-on-bright-260nw-1014240301.jpg);
-  background-repeat: no-repeat;
+  /* background-image: url(https://image.shutterstock.com/image-photo/pile-various-books-on-bright-260nw-1014240301.jpg); */
+  /* background-repeat: no-repeat;
   background-size: 100%;
-  background-attachment: fixed;
+  background-attachment: fixed; */
 }
 
 .appContainer {
@@ -63,8 +63,8 @@
   font-size: 18px;
   border: none;
   outline: none;
-  background-color: rgb(0, 255, 106);
-  color: white;
+  /* background-color: rgb(0, 255, 106); */
+  color: black;
   cursor: pointer;
   padding: 15px;
   border-radius: 100px;
@@ -108,3 +108,4 @@
 
   
 } 
+

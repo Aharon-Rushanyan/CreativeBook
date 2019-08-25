@@ -1,0 +1,32 @@
+.textfield{
+    /* background-color: #FF4136; */
+    width: 300px;
+    /* height: 300px;  */
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    transform: translate(-50%, -50%);
+}
+
+.textfieldM{
+    width: 300px;
+    /* height: 500px;  */
+    position: absolute;
+    left: 50%;
+    top: 50px;
+    transform: translate(-50%, -50%);
+}
+
+.button{
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    transform: translate(-50%, -50%);
+}
+
+/* .bookWrappers{
+    background-image: url(https://image.shutterstock.com/image-photo/pile-various-books-on-bright-260nw-1014240301.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+} */

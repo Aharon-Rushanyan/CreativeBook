@@ -95,7 +95,7 @@ function PrimarySearchAppBar(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+    const [temp, setTemp] = React.useState(true)
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -238,7 +238,7 @@ function PrimarySearchAppBar(props) {
                     </div>
                     <div className={classes.sectionDesktop}>
                         <Grid item >
-                            <Link className='link' to='/' >
+                            <Link onClick={()=>temp?setTemp(false):setTemp(true)} className='link' to={{pathname: "/",temp: temp}} >
                                 <Button variant="outlined"
                                     size="large"
                                     color="secondary"
