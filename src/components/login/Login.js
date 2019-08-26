@@ -14,6 +14,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import firebase from "../Firebase/Firebase";
 import { withRouter, Link } from "react-router-dom";
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -37,6 +40,9 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  close: {
+    padding: theme.spacing(0.5)
   }
 }));
 
@@ -45,6 +51,7 @@ const SignIn = function(props) {
   const [login, setLogin] = useState();
   const [password, setPassword] = useState(); 
   const [err, setErr] = useState();
+  const [open, setOpen] = useState();
 
   function inputLogin(e) {
     setLogin(e.target.value);
@@ -69,20 +76,29 @@ const SignIn = function(props) {
     props.history.replace({ pathname: "/" });
   }
   function signIn() {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(login, password)
-      .then(function(user) {
-        // console.log(user)
-        debugger;
-        createItem(user);
-        // props.initUser(user);
+     if (!login) {
+      setErr("Please Enter Your Email");
+      setOpen(true);
+    } else if (!password) {
+      setErr("Please Enter Your password");
+      setOpen(true);
+    } else {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(login, password)
+        .then(function(user) {
+          // console.log(user)
+          debugger;
+          createItem(user);
+          // props.initUser(user);
 
-        handlechangehistoryToHome();
-      })
-      .catch(function(error) {
-        setErr(error.message);
-      });
+          handlechangehistoryToHome();
+        })
+        .catch(function(error) {
+          setErr(error.message);
+          setOpen(true);
+        });
+    }
   }
   return (
     <Container component="main" maxWidth="xs">
@@ -147,10 +163,33 @@ const SignIn = function(props) {
               </Link>
             </Grid>
           </Grid>
-        </form>
-        <div style={{ color: "red" }}>{err}</div>
+        </form>        
       </div>
       <Box mt={5} />
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center"
+        }}
+        open={open}
+        autoHideDuration={2000}
+        onClose={() => setOpen(false)}
+        ContentProps={{
+          "aria-describedby": "message-id"
+        }}
+        message={<span id="message-id">{err}</span>}
+        action={[
+          <IconButton
+            key="close"
+            aria-label="close"
+            color="inherit"
+            className={classes.close}
+            onClick={() => setOpen(false)}
+          >
+            <CloseIcon />
+          </IconButton>
+        ]}
+      />
     </Container>
   );
 };
