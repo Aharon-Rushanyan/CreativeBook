@@ -1,5 +1,6 @@
 import React from 'react';
 import '../style.css'
+import Button from '@material-ui/core/Button'
 
 class ForumRender extends React.Component {
     constructor(props) {
@@ -29,6 +30,9 @@ class ForumRender extends React.Component {
                             </div>
                         )
                     })}
+                    {!(this.props.comments.length % 2) && <Button variant="contained" size="large" color="primary" onClick={this.props.downloudNewComments}>
+                        More
+                    </Button>}
                 </div>
         )
     }

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './book-detail.css'
 import firebase from '../Firebase/Firebase'
 import BookMenu from '../BookMenu/bookmenu';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 export default class BookDetail extends Component {
 
@@ -27,11 +28,19 @@ export default class BookDetail extends Component {
             ref.get().then(doc => this.setState({ book: doc.data() }));
         }
     }
- 
+
     render() {
         const { book } = this.state
         if (!book) {
-            return <h1>hacking pentagon..</h1>
+            return <div>
+                <LinearProgress />
+                <br />
+                <LinearProgress color="secondary" />
+                <br />
+                <LinearProgress />
+                <br />
+                <LinearProgress color="secondary" />
+            </div>
         } else {
             return (
                 <div className="details-container container">
@@ -41,7 +50,7 @@ export default class BookDetail extends Component {
                     </div>
                     <div className="info">
                         <h2 className="title">{book.title}</h2>
-                        <div className="author">by <Link to={{pathname: "/authorsbooks",authorName: `${book.author}`}}>{book.author}</Link></div>
+                        <div className="author">by <Link to={{ pathname: "/authorsbooks", authorName: `${book.author}` }}>{book.author}</Link></div>
                         <div className="pages">{book.pages} pages</div>
                         <p>
                             {[null, null, null, null, null].map((item, index) => {

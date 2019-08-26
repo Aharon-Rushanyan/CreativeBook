@@ -61,10 +61,14 @@ class Forum extends React.Component {
         }
         
     }
-    handleScroll=()=>{
-        if(window.innerHeight+document.documentElement.scrollTop!=document.documentElement.offsetHeight)
+    // handleScroll=()=>{
+    //     if(window.innerHeight+document.documentElement.scrollTop!=document.documentElement.offsetHeight)
+    //     {this.setState({limit:this.state.limit+6, temp: true})}
+    //     // console.log('hello')
+    // }
+    downloudNewComments=()=>{
         {this.setState({limit:this.state.limit+6, temp: true})}
-        // console.log('hello')
+        console.log(this.state)
     }
     updateInputComment = (key, value) => {
         this.setState({
@@ -121,9 +125,11 @@ class Forum extends React.Component {
                     enterEvent={this.enterEvent}
                     authorName={this.state.authorName}
                     addComment={this.addComment}
+                    
                 />}
                 <ForumRender
                     comments={this.state.comments}
+                    downloudNewComments={this.downloudNewComments}
                 />
                 
             </div>

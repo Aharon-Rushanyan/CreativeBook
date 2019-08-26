@@ -141,6 +141,7 @@ body {
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
+    font-style: italic;
   }
   .book_info_name {
     color: #1d77ee;
