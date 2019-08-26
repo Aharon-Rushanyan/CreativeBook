@@ -32,7 +32,7 @@ export default class BookDetail extends Component {
     render() {
         const { book } = this.state
         if (!book) {
-            return <div>
+            return <div className='asdasd'>
                 <LinearProgress />
                 <br />
                 <LinearProgress color="secondary" />
@@ -43,9 +43,11 @@ export default class BookDetail extends Component {
             </div>
         } else {
             return (
-                <div className="details-container container">
+                <div className="details-container container asdasd">
                     <div className="poster">
+                        <div>
                         <img src={book.imageUrl} />
+                        </div>
                         {sessionStorage.getItem("myid") && <BookMenu ISBN={book.ISBN} status={this.props.match} />}
                     </div>
                     <div className="info">

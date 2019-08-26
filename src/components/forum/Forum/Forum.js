@@ -20,7 +20,7 @@ class Forum extends React.Component {
         
         const db = firebase.firestore();
         const comments = db.collection("forumcomments").limit(this.state.limit).orderBy('date', 'desc');
-        this.state.data = comments.onSnapshot((querySnapshot)=>{
+        const unsubscribe = comments.onSnapshot((querySnapshot)=>{
             const list = [];
             querySnapshot.forEach(doc => {
                 const data = doc.data();
@@ -36,6 +36,7 @@ class Forum extends React.Component {
             this.setState({comments:list})
             
         })
+        this.setState({data: unsubscribe})
     }
     componentDidUpdate(){
         window.addEventListener("scroll",this.handleScroll)
@@ -71,7 +72,7 @@ class Forum extends React.Component {
     //     // console.log('hello')
     // }
     downloudNewComments=()=>{
-        {this.setState({limit:this.state.limit+6, temp: true})}
+        this.setState({limit:this.state.limit+6, temp: true})
         console.log(this.state)
     }
     updateInputComment = (key, value) => {
@@ -120,7 +121,7 @@ class Forum extends React.Component {
 
     render() {
         return (
-            <div className='forum'>
+            <div className='forum asdasd'>
                 {sessionStorage.getItem("myid") && <Input
                     newComment={this.state.newComment}
                     updateInputAuthorName={this.updateInputAuthorName}
@@ -128,7 +129,6 @@ class Forum extends React.Component {
                     addComment={this.addComment}
                     enterEvent={this.enterEvent}
                     authorName={this.state.authorName}
-                    addComment={this.addComment}
                     
                 />}
                 <ForumRender

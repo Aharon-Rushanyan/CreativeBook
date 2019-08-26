@@ -11,37 +11,44 @@ import Booktable from '../Booktable/Booktable';
 import BookDetail from '../book-details/book-detail';
 import SearchResult from '../SearchResult/SearchResult'
 import pageNotFound from '../pageNotFound/pageNotFound'
-
+import Footer from "../Footer/Footer"
 export default function Routing() {
     return (
-        <div>
-            <Router>
-                <Navbar />
-                <Switch>
-                    <Route exact path="/" component={BookRender} />
-                    <Route path="/user" component={User} />
-                    <Route path="/signin" component={SignInSide} />
-                    <Route path="/addbook" component={AddBook} />
-                    <Route path="/mybook/:key(all|read|reading|willread)" component={Mybooks} />
-                    <Route path="/forum" component={Forum} />
-                    <Route path='/authorsbooks' component={BookRender}/>
-                    <Route path="/table" component={Booktable} />
-                    <Route path="/book/:id" component={BookDetail} />
-                    <Route path="/mybook/book/:id" component={BookDetail} />
-                    <Route path="/searchresult" component={SearchResult} />
-                    <Route path="*" component={pageNotFound} />
+        <>
+            <div className="app-comp">
+                <Router>
+                    <Navbar />
+                    <Switch>
+                        <Route exact path="/" component={BookRender} />
+                        <Route path="/user" component={User} />
+                        <Route path="/signin" component={SignInSide} />
+                        <Route path="/addbook" component={AddBook} />
+                        <Route path="/mybook/:key(all|read|reading|willread)" component={Mybooks} />
+                        <Route path="/forum" component={Forum} />
+                        <Route path='/authorsbooks' component={BookRender} />
+                        <Route path="/table" component={Booktable} />
+                        <Route path="/book/:id" component={BookDetail} />
+                        <Route path="/mybook/book/:id" component={BookDetail} />
+                        <Route path="/searchresult" component={SearchResult} />
 
-                </Switch>
-                <input
-                    type="button"
-                    value="Top"
-                    className="scroll-to-top"
-                    onClick={() => window.scrollTo({
-                        top: 0,
-                        behavior: "smooth"
-                    })}
-                />
-            </Router>
-        </div>
+                        <Route path="*" component={pageNotFound} />
+
+                    </Switch>
+                    <input
+                        type="button"
+                        value="Top"
+                        className="scroll-to-top"
+                        onClick={() => window.scrollTo({
+                            top: 0,
+                            behavior: "smooth"
+                        })}
+
+                    />
+                    <Footer />
+                </Router>
+            </div>
+            
+        </>
+
     );
 }

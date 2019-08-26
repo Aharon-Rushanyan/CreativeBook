@@ -7,13 +7,10 @@ import firebase from "../Firebase/Firebase";
 import SignUp from '../signup/signup'
 
 class User extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   state = {
     userId: "",
     userName: "",
-    userPhoto: avatar,
+    userPhoto: "",
     file: "",
     imagePreviewUrl: "",
     open: false
@@ -98,7 +95,6 @@ class User extends React.Component {
   }
 
   render() {
-    const { open } = this.state;
     return (sessionStorage.getItem("myid")?<div className="user-conteiner">
     <div className="container emp-profile">
       <form method="post">

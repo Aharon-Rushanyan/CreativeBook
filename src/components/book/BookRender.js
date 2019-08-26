@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 
 function BookRender(props) {
     const [book, setBook] = useState();
-    const [limit, setLimit] = useState(6);
+    const [limit, setLimit] = useState(9);
 
     useEffect(function fire() {
         window.addEventListener("scroll",handleScroll)
@@ -86,7 +86,7 @@ function BookRender(props) {
         {setLimit(limit+6)}
     }
     return (
-        <div className="App">
+        <div className="App asdasd">
             <div className="appContainer container">
                 <div className="booksWrapper row">
                     {

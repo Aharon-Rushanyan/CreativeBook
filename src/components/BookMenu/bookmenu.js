@@ -34,14 +34,14 @@ let currentnum=true;
       userinfo.update({
         reading: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
       }).then(()=>{
-        props. propforupdate(currentnum);
+        props.propforupdate(currentnum);
       });
     }
     if (location === "willread") {
       userinfo.update({
         willread: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
       }).then(()=>{
-        props. propforupdate(true);
+        props.propforupdate(true);
       });
     }
       if (location === "else" || location === undefined){
@@ -67,12 +67,12 @@ let currentnum=true;
     if (location === "reading") {
       userinfo.update({
         reading: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
-      }).then(()=>{props. propforupdate( true)});
+      }).then(()=>{props.propforupdate( true)});
     }
     if (location === "read") {
       userinfo.update({
         read: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
-      }).then(()=>{props. propforupdate( true)});
+      }).then(()=>{props.propforupdate( true)});
     }
     if (location === "else" || location === undefined){
       console.log(location)
@@ -96,12 +96,12 @@ let currentnum=true;
     if (location === "read") {
       userinfo.update({
         read: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
-      }).then(()=>{props. propforupdate( true)});
+      }).then(()=>{props.propforupdate( true)});
     }
     if (location === "willread") {
       userinfo.update({
         willread: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
-      }).then(()=>{props. propforupdate( true)});
+      }).then(()=>{props.propforupdate( true)});
     }
     if (location === "else" || location === undefined){
       console.log(location)
@@ -123,19 +123,19 @@ let currentnum=true;
       userinfo.update({
         all: firebase.firestore.FieldValue.arrayRemove(props.ISBN),
         read: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
-      }).then(()=>{props. propforupdate( true)});
+      }).then(()=>{props.propforupdate( true)});
     }
     if (location === "willread") {
       userinfo.update({
         all: firebase.firestore.FieldValue.arrayRemove(props.ISBN),
         willread: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
-      }).then(()=>{props. propforupdate( true)});
+      }).then(()=>{props.propforupdate( true)});
     }
     if (location === "reading") {
       userinfo.update({
         all: firebase.firestore.FieldValue.arrayRemove(props.ISBN),
         reading: firebase.firestore.FieldValue.arrayRemove(props.ISBN)
-      }).then(()=>{props. propforupdate( true)});
+      }).then(()=>{props.propforupdate( true)});
     }
     
     setAnchorEl(null);

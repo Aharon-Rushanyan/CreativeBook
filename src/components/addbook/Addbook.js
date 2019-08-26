@@ -109,7 +109,6 @@ class AddBook extends React.Component {
                 !this.state.pages || !this.state.imageUrl?'addbook':`book/${this.state.ISBN}`}>
                 <Button
                     variant="contained" size="large" color="primary"
-                    className=''
                     onClick={this.handleAddClick}
                     className='button'
                 >
