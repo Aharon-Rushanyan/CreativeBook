@@ -10,7 +10,7 @@ function Input(props) {
                 <div className="book_name_wrapper">
 
                     <TextField
-                        label="Authors name *"
+                        label="Books name *"
                         type="text"
                         className="book_name"
                         placeholder='...'
