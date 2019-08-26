@@ -13,13 +13,14 @@ class Forum extends React.Component {
             authorName: '',
             newComment: '',
             comments: [],
+            data: ()=>{},
         }
     }
     componentDidMount() {
         
         const db = firebase.firestore();
         const comments = db.collection("forumcomments").limit(this.state.limit).orderBy('date', 'desc');
-        comments.onSnapshot((querySnapshot)=>{
+        this.state.data = comments.onSnapshot((querySnapshot)=>{
             const list = [];
             querySnapshot.forEach(doc => {
                 const data = doc.data();
@@ -60,6 +61,9 @@ class Forum extends React.Component {
             })
         }
         
+    }
+    componentWillUnmount(){
+        this.state.data();
     }
     // handleScroll=()=>{
     //     if(window.innerHeight+document.documentElement.scrollTop!=document.documentElement.offsetHeight)

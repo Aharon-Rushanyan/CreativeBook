@@ -5,6 +5,9 @@ import firebase from '../Firebase/Firebase'
 import './style.css';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import {Link} from 'react-router-dom';
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 class AddBook extends React.Component {
     state = {
@@ -14,6 +17,8 @@ class AddBook extends React.Component {
         rate: 5,
         status: 1,
         currentPage: 10,
+        err: '',
+        open: false,
     }
 
     updateInput = (event) => this.setState({ [event.target.name]: event.target.value })
@@ -21,7 +26,10 @@ class AddBook extends React.Component {
     handleAddClick = () => {
         if (!this.state.ISBN || !this.state.title || !this.state.author || !this.state.description ||
             !this.state.pages || !this.state.imageUrl) {
-            return alert('please fil in all fields');
+                this.setState({
+                    err: "Please fill all the fields",
+                    open: true
+                })
         }else{
             const db = firebase.firestore();
             const booksRef = db.collection("bookslibrary").doc(this.state.ISBN);
@@ -109,6 +117,29 @@ class AddBook extends React.Component {
                     <CloudUploadIcon style={{marginLeft:'10px'}}/>
                 </Button>
                 </Link>
+                <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center"
+        }}
+        open={this.state.open}
+        autoHideDuration={2000}
+        onClose={() => this.setState({open: false})}
+        ContentProps={{
+          "aria-describedby": "message-id"
+        }}
+        message={<span id="message-id">{this.state.err}</span>}
+        action={[
+          <IconButton
+            key="close"
+            aria-label="close"
+            color="inherit"
+            onClick={() => this.setState({open: false})}
+          >
+            <CloseIcon />
+          </IconButton>
+        ]}
+      />
                 
             </div>);
     }
