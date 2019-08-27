@@ -4,6 +4,9 @@ import uuid from 'uuid'
 import ForumRender from '../ForumRender/ForumRender';
 import firebase from '../../Firebase/Firebase';
 import '../style.css';
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 class Forum extends React.Component {
     constructor(props) {
         super(props);
@@ -14,6 +17,8 @@ class Forum extends React.Component {
             newComment: '',
             comments: [],
             data: ()=>{},
+            err: '',
+            open: false,
         }
     }
     componentDidMount() {
@@ -85,10 +90,7 @@ class Forum extends React.Component {
             [key]: value
         })
     }
-    enterEvent = e => {
-        if (this.state.newComment === '' || this.state.authorName === '') {
-            return false
-        }
+    enterEvent = e => {        
         if (e.keyCode === 13) {
             this.addComment()
         }
@@ -106,7 +108,12 @@ class Forum extends React.Component {
         const db = firebase.firestore();
         const commentsRef = db.collection("forumcomments").doc(newComment.id);
         console.log(commentsRef)
-        debugger;
+        if (this.state.newComment === '' || this.state.authorName === ''){
+            this.setState({
+                err: "Please fill all the fields",
+                open: true
+            })
+        } else {(
         commentsRef.set(newComment).then(() => {
             comments.unshift(newComment);
             this.setState({
@@ -115,6 +122,7 @@ class Forum extends React.Component {
                 comments,
             })
         })
+        )}
     }
     
     
@@ -135,6 +143,29 @@ class Forum extends React.Component {
                     comments={this.state.comments}
                     downloudNewComments={this.downloudNewComments}
                 />
+                <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center"
+        }}
+        open={this.state.open}
+        autoHideDuration={2000}
+        onClose={() => this.setState({open: false})}
+        ContentProps={{
+          "aria-describedby": "message-id"
+        }}
+        message={<span id="message-id">{this.state.err}</span>}
+        action={[
+          <IconButton
+            key="close"
+            aria-label="close"
+            color="inherit"
+            onClick={() => this.setState({open: false})}
+          >
+            <CloseIcon />
+          </IconButton>
+        ]}
+      />
                 
             </div>
         );

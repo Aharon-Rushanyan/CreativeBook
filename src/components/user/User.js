@@ -8,7 +8,7 @@ import SignUp from '../signup/signup'
 
 class User extends React.Component {
   state = {
-    userId: "",
+    userDate: "",
     userName: "",
     userPhoto: "",
     file: "",
@@ -19,7 +19,7 @@ class User extends React.Component {
   componentDidMount() {
     this.setState({
       userName: sessionStorage.getItem("myname"),
-      userId: sessionStorage.getItem("myid"),
+      userDate: sessionStorage.getItem("userdate"),
       userEmail: sessionStorage.getItem("useremail")
     });
     const storageRef = firebase.storage().ref();
@@ -145,10 +145,10 @@ class User extends React.Component {
               >
                 <div className="row">
                   <div className="col-md-6">
-                    <label>User Id</label>
+                    <label>Registered On</label>
                   </div>
                   <div className="col-md-6">
-                    <p>{this.state.userId}</p>
+                    <p>{this.state.userDate}</p>
                   </div>
                 </div>
                 <div className="row">
