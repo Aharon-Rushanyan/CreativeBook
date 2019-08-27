@@ -66,6 +66,7 @@ const SignIn = function(props) {
     sessionStorage.useremail = user.user.email;
     sessionStorage.myname = user.user.displayName;
     sessionStorage.myid = user.user.uid;
+    sessionStorage.userdate = user.user.metadata.creationTime.slice(5,16)
   }
 
   function inputPass(e) {
