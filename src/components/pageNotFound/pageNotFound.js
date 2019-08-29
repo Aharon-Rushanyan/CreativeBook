@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function pageNotFound() {
   return (
-    <div className="page-wrap d-flex flex-row align-items-center">
+    <div className="page-wrap d-flex flex-row align-items-center asdasd">
     <div className="container">
         <div className="row justify-content-center">
             <div className="col-md-12 text-center">
