@@ -142,7 +142,7 @@ class Forum extends React.Component {
 
                     <div className="flex-container2">
                         <div className="headers">
-                            <h3 className="firstelem" > Here u can see and add some winged words</h3>
+                            <h3 className="firstelem" > Forum</h3>
                           
                         </div>
                         <Popup 

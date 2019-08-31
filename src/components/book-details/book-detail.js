@@ -46,13 +46,13 @@ export default class BookDetail extends Component {
                 <div className="details-container container asdasd">
                     <div className="poster">
                         <div>
-                        <img src={book.imageUrl} />
+                            <img src={book.imageUrl} />
                         </div>
                         {sessionStorage.getItem("myid") && <BookMenu ISBN={book.ISBN} status={this.props.match} />}
                     </div>
                     <div className="info">
                         <h2 className="title">{book.title}</h2>
-                        <div className="author">by <Link to={{ pathname: "/authorsbooks", authorName: `${book.author}` }}>{book.author}</Link></div>
+                        <div className="author">by <Link to={`/authorsbooks/${book.author}`}>{book.author}</Link></div>
                         <div className="pages">{book.pages} pages</div>
                         <p>
                             {[null, null, null, null, null].map((item, index) => {

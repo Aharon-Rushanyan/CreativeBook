@@ -13,10 +13,10 @@ function BookRender(props) {
         // window.addEventListener("scroll", handleScroll)
         const abortController = new AbortController();
 
-        if (props.location.authorName) {
+        if (props.location.pathname !== '/') {
             const db = firebase.firestore();
             const books = db.collection("bookslibrary");
-            const query = books.where("author", "==", props.location.authorName)
+            const query = books.where("author", "==", props.location.pathname.slice(14))
             query.limit(limit).get()
                 .then(querySnapshot => {
                     const list = [];
