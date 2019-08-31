@@ -5,6 +5,7 @@ import avatar from "../../logos/avatarRick.png";
 import { Link } from "react-router-dom";
 import firebase from "../Firebase/Firebase";
 import SignUp from '../signup/signup'
+import Modal from 'react-responsive-modal';
 
 class User extends React.Component {
   state = {
@@ -94,14 +95,18 @@ class User extends React.Component {
     reader.readAsDataURL(file);
   }
 
-  render() {
+  render() { const { open } = this.state;
     return (sessionStorage.getItem("myid")?<div className="user-conteiner">
     <div className="container emp-profile">
       <form method="post">
         <div className="row">
           <div className="col-md-4">
             <div className="profile-img">
-              <img src={this.state && this.state.userPhoto} />
+            <img onClick={this.onOpenModal} src={this.state && this.state.userPhoto} />
+            <Modal open={open} onClose={this.onCloseModal} center>
+        <img  src={this.state && this.state.userPhoto} />
+        </Modal>
+              
               <div className="file btn btn-lg btn-primary">
                 Change Photo
                 <input

@@ -6,16 +6,17 @@ import { useEffect } from 'react'
 
 function BookRender(props) {
     const [book, setBook] = useState();
-    const [limit, setLimit] = useState(9);
-
+    const [limit, setLimit] = useState(6);
+    let forscroll = React.createRef();
+    const [x, setx] = useState(300);
     useEffect(function fire() {
-        window.addEventListener("scroll",handleScroll)
+        // window.addEventListener("scroll", handleScroll)
         const abortController = new AbortController();
-        
-        if (props.location.authorName) {
+
+        if (props.location.pathname !== '/') {
             const db = firebase.firestore();
             const books = db.collection("bookslibrary");
-            const query = books.where("author", "==", props.location.authorName)
+            const query = books.where("author", "==", props.location.pathname.slice(14))
             query.limit(limit).get()
                 .then(querySnapshot => {
                     const list = [];
@@ -40,10 +41,10 @@ function BookRender(props) {
 
                         list.push(book);
                     });
-                    setBook(list)        
+                    setBook(list)
                 })
                 .catch(err => console.error(err.message));
-        }else{
+        } else {
             const db = firebase.firestore();
             const books = db.collection("bookslibrary");
             books.limit(limit).get()
@@ -51,7 +52,7 @@ function BookRender(props) {
                     const list = [];
                     querySnapshot.forEach(doc => {
                         const data = doc.data();
-    
+
                         const book = {
                             author: data.author,
                             title: data.title,
@@ -67,26 +68,47 @@ function BookRender(props) {
                             imageUrl: data.imageUrl,
                             ISBN: data.ISBN
                         };
-    
+
                         list.push(book);
                     });
                     setBook(list)
                 })
                 .catch(err => console.error(err.message));
+            window.onscroll = function () { myFunction() };
+
         }
-        
+
         return function cleanup() {
             abortController.abort()
-            window.removeEventListener("scroll",handleScroll)
+            // window.removeEventListener("scroll", handleScroll)
         }
-    }, [limit,props.location.temp]);
 
-    function handleScroll(){
-        if(window.innerHeight+document.documentElement.scrollTop!=document.documentElement.offsetHeight)
-        {setLimit(limit+6)}
+    }, [props.location.temp, limit]);
+
+    function myFunction() {
+
+        console.log("nowwe are here" + document.documentElement.scrollTop)
+        console.log("this is my x = " + x)
+
+        if (document.documentElement.scrollTop > x) {
+
+
+
+            setx(x + 350);
+            setLimit(limit + 3);
+
+
+        }
+
     }
+    // function handleScroll() {
+    //     if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) { setLimit(limit + 6) }
+    // }
     return (
-        <div className="App asdasd">
+
+
+
+        <div className="App asdasd" ref={forscroll} >
             <div className="appContainer container">
                 <div className="booksWrapper row">
                     {

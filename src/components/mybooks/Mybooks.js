@@ -55,7 +55,7 @@ export default class Test extends React.Component {
         }
     }
     componentDidUpdate(prevprops, props) {
-        
+
         if (this.state.tempUpdate) {
             let db = firebase.firestore();
             // const user = firebase.auth().currentUser;
@@ -82,7 +82,7 @@ export default class Test extends React.Component {
                                             });
                                     })
                                 )
-                                    .then(data => this.setState({ [key]: data ,tempUpdate:false}))
+                                    .then(data => this.setState({ [key]: data, tempUpdate: false }))
                                     .catch(err => console.error(err.message));
                             }
                         } else {
@@ -93,7 +93,7 @@ export default class Test extends React.Component {
                     .catch(err => console.error(err.message));
             }
         }
-        
+
     }
     propforupdate(temp) {
         this.setState({ tempUpdate: temp }, console.log(this.state.tempUpdate));
@@ -105,9 +105,13 @@ export default class Test extends React.Component {
 
         return (sessionStorage.getItem("myid") ?
             <>
+                <h3 style={{
+                    textAlign: "center", fontStyle: "italic"
+                }}>My books</h3>
                 <div className="flex-container2 asdasd">
 
                     <div className="flex-container">
+
                         <Tab />
                     </div>
                     {this.state[key] ?

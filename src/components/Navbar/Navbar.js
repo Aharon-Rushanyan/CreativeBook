@@ -31,6 +31,7 @@ const useStyles = makeStyles(theme => ({
         marginRight: theme.spacing(2),
     },
     title: {
+        cursor: "pointer",
         height: '20px',
         width:'150px',
         marginRight: theme.spacing(2),

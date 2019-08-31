@@ -16,7 +16,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import { withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 // import firebase from 'firebase/app'
 // import 'firebase/app'
@@ -117,12 +117,12 @@ function SignInSide(props) {
         .createUserWithEmailAndPassword(login, password)
         .then((us) => {
           const user = firebase.auth().currentUser;
-                        if(user !== null){
-                            user.updateProfile({
-                                displayName: name
-                            })
-                            const db = firebase.firestore();
-                            const userinfo = db.collection("userinfo").doc(user.uid);
+          if (user !== null) {
+            user.updateProfile({
+              displayName: name
+            })
+            const db = firebase.firestore();
+            const userinfo = db.collection("userinfo").doc(user.uid);
 
             userinfo.set({
               all: [],
@@ -134,7 +134,7 @@ function SignInSide(props) {
           createItem(user)
           handlechangehistoryToHome();
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error.message);
           setErr(error.message);
           setOpen(true);
@@ -179,7 +179,7 @@ function SignInSide(props) {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                n
+
               />
               <TextField
                 variant="outlined"
